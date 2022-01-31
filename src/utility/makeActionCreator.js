@@ -9,4 +9,9 @@ export const makeActionCreator = (type, ...argNames) => {
       return action;
     }
 };
+
+export const actionType = (type, payload) => ({
+  type,
+  payload,
+});
   

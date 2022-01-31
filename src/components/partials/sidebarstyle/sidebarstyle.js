@@ -10,13 +10,7 @@ import Scrollbar from 'smooth-scrollbar'
 
 //img
 import logo from '../../../../src/assets/images/logo.png'
-
-
-// function mapStateToProps(state) {
-//     return {
-//         darkMode: getDarkMode(state)
-//     };
-// }
+import {checkSuperAdminRole,checkAdminRole,checkEventOwnerRole} from "../../../helpers/checkRoleHelper"
 
 
 const minisidbar =() =>{
@@ -89,13 +83,63 @@ const SidebarStyle = (props) => {
                                 <span>Visit site</span>
                             </Link>
                         </li>
-                        <li className={`${location.pathname === '/' ? 'active' : ''} `}>
-                            <Link to="/" className="iq-waves-effect">
+                        {checkSuperAdminRole()?<li className={`${location.pathname === '/dashboard' ? 'active' : ''} `}>
+                            <Link to="/dashboard" className="iq-waves-effect">
                                 <i className="las la-home iq-arrow-left"></i>
                                 <span>Dashboard</span>
                             </Link>
+                        </li>:""}
+                        {checkEventOwnerRole()?<li className={`${location.pathname === '/mydashboard' ? 'active' : ''} `}>
+                            <Link to="/mydashboard" className="iq-waves-effect">
+                                <i className="las la-home iq-arrow-left"></i>
+                                <span>Dashboard</span>
+                            </Link>
+                        </li>:""}
+                        {checkSuperAdminRole()?
+                        <li className={activeMenu === '0' ? 'active' : ''}>
+                            <Accordion.Toggle as={Button} href="#" eventKey="0" variant=" collapsed" data-toggle="collapse" aria-expanded={activeMenu === '0' ? 'true' : 'false'}><i className="las la-list-ul"></i><span>Roles</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
+                            <Accordion.Collapse  className="submenu" eventKey="0">
+                            <ul id="roles" className="iq-submenu " data-parent="#iq-sidebar-toggle">
+                                <li className={`${location.pathname === '/add-roles' ? 'active' : ''} `}><Link to="/add-role"><i className="las la-user-plus"></i>Add Role</Link></li>
+                                <li className={`${location.pathname === '/role-list' ? 'active' : ''} `}><Link to="/role-list"><i className="las la-eye"></i>Role List</Link></li>
+                            </ul>
+                            </Accordion.Collapse>
+                        </li>:""
+}
+{checkAdminRole()?<li className={activeMenu === '1' ? 'active' : ''}>
+                            <Accordion.Toggle as={Button} href="#" eventKey="1" variant=" collapsed" data-toggle="collapse" aria-expanded={activeMenu === '1' ? 'true' : 'false'}><i className="las la-list-ul"></i><span>Category</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
+                            <Accordion.Collapse  className="submenu" eventKey="1">
+                            <ul id="category" className="iq-submenu " data-parent="#iq-sidebar-toggle">
+                            {checkAdminRole()?<li className={`${location.pathname === '/category-list' ? 'active' : ''} `}><Link to="/category-list"><i className="las la-eye"></i>Category List</Link></li>:""}
+                            {checkAdminRole()?<li className={`${location.pathname === '/add-category' ? 'active' : ''} `}><Link to="/add-category"><i className="las la-user-plus"></i>Add Category</Link></li>:""}
+                                
+                            </ul>
+                            </Accordion.Collapse>
+                        </li>:""}
+                        {checkAdminRole()?
+                        <li className={activeMenu === '3' ? 'active' : ''}>
+                            <Accordion.Toggle as={Button} href="#" eventKey="3" variant=" collapsed" data-toggle="collapse" aria-expanded={activeMenu === '3' ? 'true' : 'false'}><i className="las la-user-friends"></i><span>User</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
+                            <Accordion.Collapse  className="submenu" eventKey="3">
+                            <ul id="user" className="iq-submenu " data-parent="#iq-sidebar-toggle">
+                            <li className={`${location.pathname === '/user-list' ? 'active' : ''} `}><Link to="/user-list"><i className="las la-eye"></i>user List</Link></li>
+                                <li className={`${location.pathname === '/add-user' ? 'active' : ''} `}><Link to="/add-user"><i className="las la-user-plus"></i>Add User</Link></li>
+                                
+                            </ul>
+                            </Accordion.Collapse>
+                        </li>:""}
+                        <li className={activeMenu === '3' ? 'active' : ''}>
+                            <Accordion.Toggle as={Button} href="#" eventKey="3" variant=" collapsed" data-toggle="collapse" aria-expanded="false"><i className="las la-film"></i><span>Event</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
+                            <Accordion.Collapse  className="submenu" eventKey="3">
+                            <ul id="movie" className="iq-submenu" data-parent="#iq-sidebar-toggle">
+                            {checkAdminRole()?<li className={`${location.pathname === '/add-event' ? 'active' : ''} `}><Link to="/add-event"><i className="las la-user-plus"></i>Add Event</Link></li>:""}
+                            {checkEventOwnerRole()? <li className={`${location.pathname === '/add-new-event' ? 'active' : ''} `}><Link to="/add-new-event"><i className="las la-user-plus"></i>Add Event</Link></li>:""}
+                               {checkEventOwnerRole()?  <li className={`${location.pathname === '/my-events' ? 'active' : ''} `}><Link to="/my-events"><i className="las la-user-plus"></i>My Events</Link></li>:""}
+                                {checkAdminRole()? <li className={`${location.pathname === '/pending-event' ? 'active' : ''} `}><Link to="/pending-event"><i className="las la-user-plus"></i>Pending Events</Link></li>:""}
+                                {checkAdminRole()? <li className={`${location.pathname === '/event-list' ? 'active' : ''} `}><Link to="/event-list"><i className="las la-eye"></i>Events List</Link></li>:""}
+                            </ul>
+                            </Accordion.Collapse>
                         </li>
-                        <li className={`${location.pathname === '/rating' ? 'active' : ''} `}>
+                        {/* <li className={`${location.pathname === '/rating' ? 'active' : ''} `}>
                             <Link to="/rating" className="iq-waves-effect">
                                 <i className="las la-star-half-alt"></i>
                                 <span>Rating </span>
@@ -255,8 +299,10 @@ const SidebarStyle = (props) => {
                                 </li>
                             </Accordion>
                             </Accordion.Collapse>
+                            
                         </li>
-                    </Accordion>
+                        */}
+                    </Accordion> 
                     </nav>
                 </div>
             </div>
