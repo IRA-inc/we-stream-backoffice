@@ -2,7 +2,9 @@ import {Routes,Route,useLocation} from 'react-router-dom'
 import {TransitionGroup,CSSTransition} from "react-transition-group";
 
 //main
-import Dashbord from '../views/main/dashbord'
+// import Dashbord from '../views/main/dashbord'
+import Dashbord from '../components/dashboard/admin/Admindashbord'
+import EventOwnerDashbord from '../components/dashboard/eventOwner/EventOwnerDashboard'
 import Rating from '../views/main/rating';
 import Comment from '../views/main/comment';
 import User from '../views/main/user';
@@ -67,8 +69,27 @@ import Remixicons from '../views/Icons/remixicons';
 import Unicons from '../views/Icons/unicons'
 
 //Category
-import AddCategory from '../views/category/add-category';
-import CategoryList from '../views/category/category-list';
+import AddCategory from '../components/category/addCategory';
+import CategoryList from '../components/category/category-list';
+import EditCategory from '../components/category/EditCategory';
+
+// roles
+import AddRoles from '../components/Roles/addRoles'
+import RolesList from '../components/Roles/roles-list'
+import EditRole from '../components/Roles/EditRoles'
+
+// Users
+import AddUser from '../components/users/addUser'
+import UserList from '../components/users/userLists'
+import EditUser from '../components/users/editUser'
+
+//Event
+import AddEvent from '../components/events/addEvent';
+import EventList from '../components/events/eventLists';
+import EditEvent from '../components/events/editEvent';
+import PeningEventList from '../components/events/pendingEvent';
+import AddMyEvent from '../components/events/AddMyEvent';
+import MyEventList from '../components/events/MyEvent';
 
 //Movie
 import AddMovie from '../views/movie/add-movie';
@@ -86,9 +107,12 @@ import VerticalWizard from '../views/form-wizard/vertical-wizard';
 //auth pages
 import ConfirmMail  from '../views/auth/confirmmail'
 import LockScreen  from '../views/auth/lockscreen'
-import RecoverPassword  from '../views/auth/recoverpassword'
-import SignIn  from '../views/auth/signin'
-import SignUp  from '../views/auth/signup'
+// import RecoverPassword  from '../components/auth/recoverpassword'
+import Login from '../components/auth/login'
+import SignUp  from '../components/auth/signup'
+import SendResetLink from '../components/auth/send-reset-link'
+import ResetPassword from '../components/auth/recover-password'
+import UpdatePassword from '../components/auth/update-password'
 
 //ExtarPages
 import Maintainance from '../views/pages/maintainance'
@@ -99,6 +123,8 @@ import CommingSoon  from  '../views/pages/commingsoon'
 //Layouts
 import Layout from '../layouts/layout'
 import BlankLayout from '../layouts/blanklayout';
+import OwnerEditEvent from '../components/events/editMyEvent';
+
 
 
 const Layout1Route = (props) => {
@@ -116,11 +142,36 @@ const Layout1Route = (props) => {
             >
                 <Routes history={history}  location={location}>
                 <Route element={<Layout />}>
-                    <Route path="/" exact element={<Dashbord />} />
+                    <Route path="/dashboard" exact element={<Dashbord />} />
+                    <Route path="/mydashboard" exact element={<EventOwnerDashbord />} />
                     <Route path="/rating" element={<Rating />} />
                     <Route path="/comment" element={<Comment />} />
                     <Route path="/user" element={<User />} />
                     <Route path="/pages-pricing" element={<Pricing />} />
+
+                    {/* Roles */}
+                    <Route path="/add-role" element={<AddRoles />} />
+                    <Route path="/role-list" element={<RolesList />} />
+                    <Route path="/edit-role/:id" element={<EditRole/>} />
+
+                    {/* category */}
+                    <Route path="/add-category" element={<AddCategory />} />
+                    <Route path="/category-list" element={<CategoryList />} />
+                    <Route path="/edit-category/:id" element={<EditCategory/>} />
+
+                    {/* user */}
+                    <Route path="/add-user" element={<AddUser />} />
+                    <Route path="/user-list" element={<UserList />} />
+                    <Route path="/edit-user/:id" element={<EditUser/>} />
+
+                    {/* user */}
+                    <Route path="/add-event" element={<AddEvent />} />
+                    <Route path="/event-list" element={<EventList />} />
+                    <Route path="/my-events" element={<MyEventList />} />
+                    <Route path="/pending-event" element={<PeningEventList />} />
+                    <Route path="/add-new-event" element={<AddMyEvent/>} />
+                    <Route path="/edit-event/:id" element={<EditEvent/>} />
+                    <Route path="/edit-myevent/:id" element={<OwnerEditEvent/>} />
 
                     {/* App */}
                     <Route path="/user-profile"         element={<UserProfile />} />
@@ -180,9 +231,7 @@ const Layout1Route = (props) => {
                     <Route path="/ui-tooltips"       element={<UiTooltips />}/>
                     <Route path="/ui-typography"     element={<UiTypography />}/>
 
-                    {/* Category */}
-                    <Route path="/add-category"       element={<AddCategory />}/>
-                    <Route path="/category-list"      element={<CategoryList />}/>
+                    
                     
                     {/* Movie */}
                     <Route path="/add-movie"        element={<AddMovie />}/>
@@ -196,14 +245,21 @@ const Layout1Route = (props) => {
                     <Route path="/form-wizard"      element={<SimpleWizard />}/>
                     <Route path="/form-wizard-validate"    element={<ValidateWizard />}/>
                     <Route path="/form-wizard-vertical"    element={<VerticalWizard />}/>
+                    {/* Change password */}
+                    <Route path="/change-password" element={<UpdatePassword />} />
                 </Route>
 
                 <Route element={<BlankLayout />}>
                     {/* auth */}
-                    <Route path="/auth/pages-confirm-mail" element={<ConfirmMail />} />
+
+                    <Route path="/sign-up" element={<SignUp />} />
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/reset-link" element={<SendResetLink />} />
+                        <Route path="/reset-password" element={<ResetPassword />} />
+                     <Route path="/auth/pages-confirm-mail" element={<ConfirmMail />} />
                     <Route path="/auth/pages-lock-screen" element={<LockScreen />} />
-                    <Route path="/auth/pages-recoverpw" element={<RecoverPassword />} />
-                    <Route path="/auth/sign-in" element={<SignIn />} />
+                    {/* <Route path="/auth/pages-recoverpw" element={<RecoverPassword />} /> */}
+                 {/* <Route path="/auth/sign-in" element={<SignIn />} /> */}
                     <Route path="/auth/sign-up" element={<SignUp />} />
 
                     {/* ExtraPages */}
