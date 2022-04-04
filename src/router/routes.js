@@ -86,10 +86,11 @@ import EditUser from '../components/users/editUser'
 //Event
 import AddEvent from '../components/events/addEvent';
 import EventList from '../components/events/eventLists';
-import EditEvent from '../components/events/editEvent';
+import EditUserEvent from '../components/events/editUserEvent';
 import PeningEventList from '../components/events/pendingEvent';
 import AddMyEvent from '../components/events/AddMyEvent';
 import MyEventList from '../components/events/MyEvent';
+import OwnerEditEvent from '../components/events/editMyEvent';
 
 //Movie
 import AddMovie from '../views/movie/add-movie';
@@ -123,7 +124,6 @@ import CommingSoon  from  '../views/pages/commingsoon'
 //Layouts
 import Layout from '../layouts/layout'
 import BlankLayout from '../layouts/blanklayout';
-import OwnerEditEvent from '../components/events/editMyEvent';
 
 
 
@@ -170,7 +170,7 @@ const Layout1Route = (props) => {
                     <Route path="/my-events" element={<MyEventList />} />
                     <Route path="/pending-event" element={<PeningEventList />} />
                     <Route path="/add-new-event" element={<AddMyEvent/>} />
-                    <Route path="/edit-event/:id" element={<EditEvent/>} />
+                    <Route path="/edit-event/:id" element={<EditUserEvent/>} />
                     <Route path="/edit-myevent/:id" element={<OwnerEditEvent/>} />
 
                     {/* App */}

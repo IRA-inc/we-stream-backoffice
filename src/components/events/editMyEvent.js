@@ -54,17 +54,17 @@ const OwnerEditEvent = () => {
 
   const handleUploadChange = (e) => {
     const { name, files } = e.target;
-    const fileTypes = [
-      "image/gif",
-      "image/jpeg",
-      "image/pjpeg",
-      "image/x-png",
-      "image/png",
-      "image/svg+xml",
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "application/pdf",
-    ];
+    // const fileTypes = [
+    //   "image/gif",
+    //   "image/jpeg",
+    //   "image/pjpeg",
+    //   "image/x-png",
+    //   "image/png",
+    //   "image/svg+xml",
+    //   "application/msword",
+    //   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    //   "application/pdf",
+    // ];
 
     if (files && files.length > 0) {
       // for (let i = 0; i < files.length; i++) {
