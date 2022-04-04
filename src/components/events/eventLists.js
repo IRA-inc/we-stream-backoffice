@@ -2,7 +2,6 @@ import React,{useEffect} from 'react'
 import { getAllEvents, deleteEventAction,activateEvent,approveEvent,cancelEvent } from "../../actions";
 import { GET_ALL_EVENTS_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
-import moment from 'moment'
 import EventTable from '../reusableComponents/tables/eventTable';
 import actionFunction from '../reusableComponents/otherComponents/actionFunction';
 

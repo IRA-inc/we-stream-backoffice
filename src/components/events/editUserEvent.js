@@ -10,7 +10,7 @@ import { CREATE_EVENT_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
 import EventForm from "../reusableComponents/forms/eventForm";
 
-const EditEvent = () => {
+const EditUserEvent = () => {
   const { id } = useParams();
   const [eventdata, setEvent] = useState({
     name: "",
@@ -62,18 +62,6 @@ const EditEvent = () => {
 
   const handleUploadChange = (e) => {
     const { name, files } = e.target;
-    const fileTypes = [
-      "image/gif",
-      "image/jpeg",
-      "image/pjpeg",
-      "image/x-png",
-      "image/png",
-      "image/svg+xml",
-      "application/msword",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "application/pdf",
-    ];
-
     if (files && files.length > 0) {
       // for (let i = 0; i < files.length; i++) {
       //     if(Number(files[i].size)>5000000){
@@ -211,4 +199,4 @@ const EditEvent = () => {
     </>
   );
 };
-export default EditEvent;
+export default EditUserEvent;
