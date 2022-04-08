@@ -16,7 +16,7 @@ services:
 
     container_name: web_office_server
     ports:
-      - '81:81'
+      - '8181:8181'
     environment:
       - ./.env
     volumes:
