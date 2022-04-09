@@ -3,14 +3,16 @@ import {Container,Row,Col,OverlayTrigger,Tooltip} from 'react-bootstrap'
 import Card  from '../../../components/Card'
 import { TableLoader } from "../../reusableComponents";
 import moment from 'moment'
+import Paginations from '../otherComponents/pagination';
+import SearchBox from '../otherComponents/searchBox';
 
 const EventTableOwner=(props)=>{
 
-const { deleteEvent,isloading,events,title}=props
+const { deleteEvent,isloading,events,title,search,handleInputChange,page,pages,onChange,toggleCardModal,toggleMomoModal}=props
 
     return(
         <> 
-        <Container fluid>
+  <Container fluid>
             <Row>
                 <Col sm="12">
                     <Card>
@@ -19,11 +21,18 @@ const { deleteEvent,isloading,events,title}=props
                             <h4 className="card-title">{title}</h4>
                         </Card.Header.Title>
                         <div className="iq-card-header-toolbar d-flex align-items-center">
+                        <SearchBox
+                        search={search}
+                        handleInputChange={handleInputChange}
+                        />
+                        {/* <div className="iq-custom-select d-inline-block sea-epi s-margin mx-2">
+                          <Select options={options2} />
+                          </div> */}
                                     <Link to="/add-event" className="btn btn-primary">Add event</Link>
                                 </div>
                     </Card.Header>
                     <Card.Body>
-                        <div className="table-view">
+                        <div className="table-responsive">
                             <table className="data-tables table movie_table" style={{width:"100%"}}>
                                 <thead>
                                 <tr>
@@ -67,8 +76,11 @@ const { deleteEvent,isloading,events,title}=props
                                             </OverlayTrigger>
                                             {event?.status==="active"?"":
                                             <>
-                                            <OverlayTrigger placement="top"overlay={<Tooltip>Pay</Tooltip>}>
-                                                <Link onClick={(e)=>e.preventDefault()} className="iq-bg-warning" to="#"><i className="ri-checkbox-circle-line"></i></Link>
+                                            <OverlayTrigger placement="top"overlay={<Tooltip>Pay with Momo</Tooltip>}>
+                                                <Link onClick={()=>toggleMomoModal(event._id)} className="iq-bg-warning" to="#"><i className="ri-checkbox-circle-line"></i></Link>
+                                            </OverlayTrigger>
+                                            <OverlayTrigger placement="top"overlay={<Tooltip>Pay with Card</Tooltip>}>
+                                                <Link onClick={()=>toggleCardModal(event._id)} className="iq-bg-warning" to="#"><i className="ri-checkbox-circle-line"></i></Link>
                                             </OverlayTrigger>
                                             </>
 }
@@ -83,10 +95,19 @@ const { deleteEvent,isloading,events,title}=props
                                                                     </tbody>
                                                                      )}
                                                                 </table>
+                                                                <div className="float-right pb-2">
+                                                        <Paginations
+                                                        page={page}
+                                                        pages={pages}
+                                                        onChange={onChange}
+                                                        />
+                                                         </div>
                                                             </div>
                                                         </Card.Body>
-                                                        </Card>
+                                                        
+                                                        </Card> 
                                                     </Col>
+                                                   
                                                 </Row>
                                             </Container>
 
@@ -94,5 +115,6 @@ const { deleteEvent,isloading,events,title}=props
 
     )
 }
+
 
 export default EventTableOwner

@@ -19,6 +19,7 @@ const OwnerEditEvent = () => {
     price: 0,
     paymentType: "",
     description: "",
+    special:false,
   });
   const [show, setShow] = useState(false);
   const [Errors, setErros] = useState("");
@@ -104,6 +105,13 @@ const OwnerEditEvent = () => {
     });
   };
 
+  const changeSpecial = (value) => {
+    setEvent({
+      ...eventdata,
+    special:value,
+  });
+};
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // const form = new FormData();
@@ -149,6 +157,7 @@ const OwnerEditEvent = () => {
         price: event?.data?.price,
         paymentType: event?.data?.paymentType,
         description: event?.data?.description,
+        special:event?.data?.special,
       });
       setVideoPath(event?.data?.content)
     }
@@ -184,6 +193,7 @@ const OwnerEditEvent = () => {
         categories={categories?.data?.results}
         videoPath={videoPath}
         handleUploadChange={handleUploadChange}
+        changeSpecial={changeSpecial}
         handleselectedCategory={handleselectedCategory}
         message="Change saved succefully"
       />

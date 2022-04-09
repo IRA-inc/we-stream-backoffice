@@ -87,10 +87,14 @@ export function* ownerCreateNewEvent(eventInput) {
   }
 }
 
-export function* getEventsAction() {
+export function* getEventsAction(searchInput) {
+  const {
+    payload: { search,page },
+  } = searchInput;
+
   yield put(startLoading({ id: GET_ALL_EVENTS_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, "/api/v1/events");
+    const response = yield call(ApiReq.get, `/api/v1/events?search=${search}&page=${page}`);
     yield put(stopLoading({ id: GET_ALL_EVENTS_LOADING_ID }));
 
     yield put(actionType(DISPLAY_ALL_DATA, response.data));
@@ -102,10 +106,13 @@ export function* getEventsAction() {
   }
 }
 
-export function* getPendingEventsAction() {
+export function* getPendingEventsAction(searchInput) {
+  const {
+    payload: { search,page },
+  } = searchInput;
   yield put(startLoading({ id: GET_PENDING_EVENTS_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, "/api/v1/events/pending");
+    const response = yield call(ApiReq.get, `/api/v1/events/pending?search=${search}&page=${page}`);
     yield put(stopLoading({ id: GET_PENDING_EVENTS_LOADING_ID }));
 
     yield put(actionType(DISPLAY_ALL_DATA, response.data));
@@ -117,10 +124,13 @@ export function* getPendingEventsAction() {
   }
 }
 
-export function* getMyEventsAction() {
+export function* getMyEventsAction(searchInput) {
+  const {
+    payload: { search,page },
+  } = searchInput;
   yield put(startLoading({ id: GET_MY_EVENTS_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, "/api/v1/events/myevents");
+    const response = yield call(ApiReq.get, `/api/v1/events/myevents?search=${search}&page=${page}`);
     yield put(stopLoading({ id: GET_MY_EVENTS_LOADING_ID }));
 
     yield put(actionType(DISPLAY_ALL_DATA, response.data));

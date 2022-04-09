@@ -25,6 +25,7 @@ const EditUserEvent = () => {
     price: 0,
     paymentType: "",
     description: "",
+    special:"",
   });
 
   const [show, setShow] = useState(false);
@@ -100,6 +101,13 @@ const EditUserEvent = () => {
     });
   };
 
+  const changeSpecial = (value) => {
+    setEvent({
+      ...eventdata,
+    special:value,
+  });
+};
+
   const handleselectedStaff = (selected) => {
     const selectedStaff = selected;
     setEvent({
@@ -155,6 +163,7 @@ const EditUserEvent = () => {
         price: event?.data?.price,
         paymentType: event?.data?.paymentType,
         description: event?.data?.description,
+        special:event?.data?.special,
       });
       setFileResult(event?.data?.banner);
       setVideoPath(event?.data?.content);
@@ -194,6 +203,7 @@ const EditUserEvent = () => {
         handleUploadChange={handleUploadChange}
         handleselectedStaff={handleselectedStaff}
         handleselectedCategory={handleselectedCategory}
+        changeSpecial={changeSpecial}
         message="Change saved succefully"
       />
     </>

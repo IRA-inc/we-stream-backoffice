@@ -3,11 +3,17 @@ import {Container,Row,Col,OverlayTrigger,Tooltip} from 'react-bootstrap'
 import Card  from '../../../components/Card'
 import { TableLoader } from "../../reusableComponents";
 import moment from 'moment'
+import Select from 'react-select'
+import SearchBox from '../otherComponents/searchBox';
+import Paginations from '../otherComponents/pagination';
 
 const EventTable=(props)=>{
 
-const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEvent }=props
-
+const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEvent,search,handleInputChange,page,pages,onChange}=props
+const options2 = [
+    { value: 'Most Likely', label: 'Most Likely' },
+    { value: 'Unlikely', label: 'Unlikely' }
+ ]
     return(
         <> 
         <Container fluid>
@@ -19,11 +25,18 @@ const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEven
                             <h4 className="card-title">{title}</h4>
                         </Card.Header.Title>
                         <div className="iq-card-header-toolbar d-flex align-items-center">
+                        <SearchBox
+                        search={search}
+                        handleInputChange={handleInputChange}
+                        />
+                        <div className="iq-custom-select d-inline-block sea-epi s-margin mx-2">
+                          <Select options={options2} />
+                          </div>
                                     <Link to="/add-event" className="btn btn-primary">Add event</Link>
                                 </div>
                     </Card.Header>
                     <Card.Body>
-                        <div className="table-view">
+                        <div className="table-responsive">
                             <table className="data-tables table movie_table" style={{width:"100%"}}>
                                 <thead>
                                 <tr>
@@ -50,7 +63,7 @@ const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEven
                                 <tbody>
                                      {events?.data?.objects?.map((event, index) => (
                                  <tr key={index}>
-                                     <td>{index+1}</td>
+                                     <td>{(page-1) * 10 + index + 1}</td>
                                     <td>
                                         <img src={event.banner} className="img-fluid avatar-50" alt="author-profile"/>
                                     </td>
@@ -58,7 +71,7 @@ const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEven
                                     <td>{event?.ownerId?.name}</td>
                                     <td>{event?.ownerId?.phoneNumber}</td>
                                     <td>{event?.ownerId?.email}</td>
-                                    <td>{moment(event.startingDate).format("DD-MM-YYYY HH:mm")}</td>
+                                    <td>{moment(event?.startingDate).format("DD-MM-YYYY HH:mm")}</td>
                                     <td>{event.estimatedDuration}</td>
                                     <td><span className={`${event?.approvalLevel==="approved"?`${event?.status==="pending"?"badge iq-bg-info":"badge iq-bg-success"}`:"badge iq-bg-primary"}`}>{event.approvalLevel==="approved"?"approved":`${event.approvalLevel}`}</span></td>
                                     <td><span className={`${event?.status==="active"?`${event?.status==="pending"?"badge iq-bg-info":"badge iq-bg-success"}`:"badge iq-bg-primary"}`}>{event.status}</span></td>
@@ -67,6 +80,12 @@ const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEven
                                             <OverlayTrigger placement="top"overlay={<Tooltip>Edit</Tooltip>}>
                                                 <Link to={`/edit-event/${event._id}`} className="iq-bg-success"><i className="ri-pencil-line"></i></Link>
                                             </OverlayTrigger>
+                                            {event?.status==="active"?
+                                            <>
+                                            <OverlayTrigger placement="top"overlay={<Tooltip>Payout</Tooltip>}>
+                                                <Link to={`/payout-event/${event._id}`} className="iq-bg-success"><i className="ri-pencil-line"></i></Link>
+                                            </OverlayTrigger>
+                                            </>:""}
                                             {event?.approvalLevel==="approved"?"":
                                             <>
                                             <OverlayTrigger placement="top"overlay={<Tooltip>Approve</Tooltip>}>
@@ -93,10 +112,19 @@ const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEven
                                                                     </tbody>
                                                                      )}
                                                                 </table>
+                                                                <div className="float-right pb-2">
+                                                        <Paginations
+                                                        page={page}
+                                                        pages={pages}
+                                                        onChange={onChange}
+                                                        />
+                                                        </div>
                                                             </div>
                                                         </Card.Body>
-                                                        </Card>
+                                                        
+                                                        </Card> 
                                                     </Col>
+                                                   
                                                 </Row>
                                             </Container>
 

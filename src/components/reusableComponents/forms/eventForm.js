@@ -26,6 +26,7 @@ const EventForm = (props) => {
     message,
     imageFile,
     videoFile,
+    changeSpecial,
     imageResult,
     handleUploadChange,
   } = props;
@@ -306,6 +307,48 @@ const EventForm = (props) => {
                       />
                       
                     </Col>
+                    {isOwner===false? 
+                    <Col sm="3" className="col-6 form-group">
+                    <Form.Group className="radio-box">
+                        <label>Special</label>
+                        <div className="radio-btn">
+                          <div className="custom-control custom-radio custom-control-inline">
+                            <input
+                              type="radio"
+                              id="customRadio6"
+                              name="customRadio-1"
+                              checked={state?.special}
+                              value={state?.special}
+                              onChange={() => changeSpecial(true)}
+                              className="custom-control-input"
+                            />
+                            <label
+                              className="custom-control-label"
+                              htmlFor="customRadio6"
+                            >
+                             Yes
+                            </label>
+                          </div>
+                          <div className="custom-control custom-radio custom-control-inline">
+                            <input
+                              type="radio"
+                              id="customRadio7"
+                              name="customRadio-1"
+                              checked={state?.special}
+                              value={state?.special}
+                              onChange={() => changeSpecial(false)}
+                              className="custom-control-input"
+                            />
+                            <label
+                              className="custom-control-label"
+                              htmlFor="customRadio7"
+                            >
+                              No{" "}
+                            </label>
+                          </div>
+                        </div>
+                      </Form.Group>
+                    </Col>:""}
                     <Form.Group className="col-12">
                         {Errors.length > 0 ? (
                           <ErrorResponse

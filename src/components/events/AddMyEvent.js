@@ -18,6 +18,7 @@ const AddMyEvent = () => {
     price: 0,
     paymentType: "",
     description: "",
+    special:false,
   });
 
   const [show, setShow] = useState(false);
@@ -50,6 +51,13 @@ const AddMyEvent = () => {
       [name]: value,
     });
   };
+
+  const changeSpecial = (value) => {
+    setEvent({
+      ...eventdata,
+    special:value,
+  });
+};
 
   const handleUploadChange = (e) => {
     const { name, files } = e.target;
@@ -95,7 +103,6 @@ const AddMyEvent = () => {
 
   const handleselectedCategory = (selected) => {
     const selectedcategoryId = selected;
-    console.log("selectedapprovalLevel===>", selectedcategoryId);
     setEvent({
       ...eventdata,
       categoryId: selectedcategoryId.value,
@@ -156,6 +163,7 @@ const AddMyEvent = () => {
         categories={categories?.data?.results}
         videoPath={videoPath}
         handleUploadChange={handleUploadChange}
+        changeSpecial={changeSpecial}
         handleselectedCategory={handleselectedCategory}
         message="Event created successfuly"
       />

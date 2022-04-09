@@ -91,6 +91,8 @@ import PeningEventList from '../components/events/pendingEvent';
 import AddMyEvent from '../components/events/AddMyEvent';
 import MyEventList from '../components/events/MyEvent';
 import OwnerEditEvent from '../components/events/editMyEvent';
+import OrdersList from '../components/orders/orders';
+import AddPayment from '../components/payments/addPayout';
 
 //Movie
 import AddMovie from '../views/movie/add-movie';
@@ -124,6 +126,7 @@ import CommingSoon  from  '../views/pages/commingsoon'
 //Layouts
 import Layout from '../layouts/layout'
 import BlankLayout from '../layouts/blanklayout';
+import PayoutList from '../components/payments/payoutPaymentsList';
 
 
 
@@ -172,6 +175,9 @@ const Layout1Route = (props) => {
                     <Route path="/add-new-event" element={<AddMyEvent/>} />
                     <Route path="/edit-event/:id" element={<EditUserEvent/>} />
                     <Route path="/edit-myevent/:id" element={<OwnerEditEvent/>} />
+                    <Route  path="/my-orders" element={<OrdersList/>}/>
+                    <Route  path="/payout-event/:id" element={<AddPayment />}/>
+                    <Route  path="/payout-event" element={<PayoutList />}/>
 
                     {/* App */}
                     <Route path="/user-profile"         element={<UserProfile />} />
