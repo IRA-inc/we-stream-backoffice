@@ -5,6 +5,7 @@ import  Card from '../../Card'
 import CustomToggle from '../../dropdowns' 
 
 
+
 //img
 
 import  user1  from  '../../../assets/images/user/2.jpg'
@@ -16,14 +17,18 @@ import  user05  from  '../../../assets/images/user/5.jpg'
 
 //img
 import logo from '../../../../src/assets/images/logo.png'
-
+import { signOut } from  '../../../actions';
+import { useSelector, useDispatch } from "react-redux";
 
 
 const  HeaderStyle1 =(props) =>{
     const minisidbar =() =>{
         document.body.classList.toggle('sidebar-main')
     }
-    
+    const dispatch = useDispatch();
+    const logout = ()=>{
+        dispatch(signOut())
+    }
     return(
          <>
         <div className="iq-top-navbar">
@@ -260,7 +265,7 @@ const  HeaderStyle1 =(props) =>{
                                             </div>
                                         </Link>
                                         <div className="d-inline-block w-100 text-center p-3">
-                                            <Link className="bg-primary iq-sign-btn" to="/auth/sign-in" role="button">Sign out<i className="ri-login-box-line ml-2"></i></Link>
+                                            <Link className="bg-primary iq-sign-btn" to="/login" onClick={()=>logout()} role="button">Sign out<i className="ri-login-box-line ml-2"></i></Link>
                                         </div>
                                     </Card.Body>
                                 </Card>    

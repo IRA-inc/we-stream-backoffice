@@ -54,7 +54,7 @@ const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEven
                                     <td>
                                         <img src={event.banner} className="img-fluid avatar-50" alt="author-profile"/>
                                     </td>
-                                    <td>{event.name}</td>
+                                    <td>{event?.name}</td>
                                     <td>{event?.ownerId?.name}</td>
                                     <td>{event?.ownerId?.phoneNumber}</td>
                                     <td>{event?.ownerId?.email}</td>
@@ -67,7 +67,7 @@ const { deleteEvent,isloading,events,title,activateEvent,cancelEvent,approveEven
                                             <OverlayTrigger placement="top"overlay={<Tooltip>Edit</Tooltip>}>
                                                 <Link to={`/edit-event/${event._id}`} className="iq-bg-success"><i className="ri-pencil-line"></i></Link>
                                             </OverlayTrigger>
-                                            {event?.status==="active"?"":
+                                            {event?.approvalLevel==="approved"?"":
                                             <>
                                             <OverlayTrigger placement="top"overlay={<Tooltip>Approve</Tooltip>}>
                                                 <Link onClick={()=>approveEvent(event._id)} className="iq-bg-warning" to="#"><i className="ri-checkbox-circle-line"></i></Link>

@@ -265,6 +265,7 @@ export function* cancelEvent(eventInput) {
   }
 }
 
+
 export function* eventSaga() {
   yield takeLatest(CREATE_EVENT, createNewEvent);
   yield takeLatest(OWNER_CREATE_EVENT, ownerCreateNewEvent);
