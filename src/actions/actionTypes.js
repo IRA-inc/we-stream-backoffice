@@ -17,6 +17,7 @@ export const GET_ONE_USER = 'GET_ONE_USER';
 export const EDIT_USER = 'EDIT_USER';
 export const CREATE_USER = 'CREATE_USER';
 export const DELETE_USER = 'DELETE_USER';
+export const ACTIVATE_USER = 'ACTIVATE_USER';
 export const GET_ALL_EVENTS = 'GET_ALL_EVENTS';
 export const GET_PENDING_EVENTS = 'GET_PENDING_EVENTS';
 export const GET_MY_EVENTS = 'GET_MY_EVENTS';

@@ -17,6 +17,7 @@ import {
   DISPLAY_ALL_STAFF,
   DELETE_USER,
   GET_ALL_STAFFS,
+  ACTIVATE_USER,
   setNotificationMessage,
   setErrorNotification,
   clearNotificationMessage,
@@ -175,6 +176,22 @@ export function* DeleteUser(roleInput) {
   }
 }
 
+export function* activateUser(roleInput) {
+  const {
+    payload: { id },
+  } = roleInput;
+  yield put(startLoading({ id: DELETE_USER_LOADING_ID }));
+  try {
+    yield call(ApiReq.patch, `/api/v1/users/activate/${id}`);
+    yield put(stopLoading({ id: DELETE_USER_LOADING_ID }));
+    //dismiss loading
+    yield put(stopLoading({ id: DELETE_USER_LOADING_ID }));
+  } catch (error) {
+    yield put(stopLoading({ id: DELETE_USER_LOADING_ID }));
+    yield put(setErrorNotification(error.response.data.Error));
+  }
+}
+
 export function* userSaga() {
   yield takeLatest(CREATE_USER, createNewUser);
   yield takeLatest(GET_ALL_USERS, getUsersAction);
@@ -182,4 +199,6 @@ export function* userSaga() {
   yield takeLatest(GET_ONE_USER, getOneUserAction);
   yield takeLatest(EDIT_USER, EditNewUser);
   yield takeLatest(DELETE_USER, DeleteUser);
+  yield takeLatest(ACTIVATE_USER, activateUser);
+  
 }

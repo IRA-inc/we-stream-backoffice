@@ -82,7 +82,7 @@ const RolesList = (props) => {
                       </tr>
                     ) : (
                       <tbody>
-                        {roles?.data?.results.map((rolesData, index) => (
+                        {roles?.data?.results?.map((rolesData, index) => (
                           <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{rolesData.name}</td>

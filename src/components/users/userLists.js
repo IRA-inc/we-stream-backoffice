@@ -2,19 +2,14 @@ import React,{useEffect} from 'react'
 import { Link} from 'react-router-dom'
 import {Container,Row,Col,OverlayTrigger,Tooltip} from 'react-bootstrap'
 import Card  from '../../components/Card';
-import { getAllUsers, deleteUserAction } from "../../actions";
+import { getAllUsers,activateUserAction, deleteUserAction } from "../../actions";
 import { GET_ALL_USERS_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
-import Swal from "sweetalert2";
 import { TableLoader } from "../reusableComponents";
 import moment from 'moment'
 //img
 import user01 from '../../assets/images/user/2.jpg'
-import user05 from '../../assets/images/user/5.jpg'
-import user03 from '../../assets/images/user/3.jpg'
-import user08 from '../../assets/images/user/6.jpg'
-import user06 from '../../assets/images/user/6.jpg'
-import user10 from '../../assets/images/user/4.jpg'
+import actionFunction from '../reusableComponents/otherComponents/actionFunction';
 
 
 const UserList = () => { 
@@ -29,30 +24,13 @@ const UserList = () => {
   }, [dispatch]);
 
   const deleteUser = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      color: "#ffffff",
-      confirmButtonText: "Yes, delete it!",
-      background: "#141414",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        dispatch(deleteUserAction({ id }));
-        dispatch(getAllUsers());
-        Swal.fire({
-          title: "Deleted!",
-          text: "User has been deleted.",
-          icon: "success",
-          color: "#ffffff",
-          background: "#141414",
-        });
-      }
-    });
+    actionFunction(id,deleteUserAction,getAllUsers,"delete","User has been deleted","Deleted",dispatch)
   };
+
+  const activateUser = (id,isActive) => {
+    actionFunction(id,activateUserAction,getAllUsers,`${isActive===true?"Deactivate":"activate"}`,`User has been ${isActive===true?"Deactivate":"activate"}`,`${isActive===true?"Deactivated":"activated"}`,dispatch)
+  };
+ 
     return (
        <> 
             <Container fluid>
@@ -108,8 +86,8 @@ const UserList = () => {
                                                 <OverlayTrigger placement="top"overlay={<Tooltip>Edit</Tooltip>}>
                                                     <Link to={`/edit-user/${user._id}`} className="iq-bg-success"><i className="ri-pencil-line"></i></Link>
                                                 </OverlayTrigger>
-                                                <OverlayTrigger placement="top"overlay={<Tooltip>Activate</Tooltip>}>
-                                                    <Link onClick={() => deleteUser(user._id)} className="iq-bg-info" to="#"><i className="ri-checkbox-circle-line"></i></Link>
+                                                <OverlayTrigger placement="top"overlay={<Tooltip>{user.isActive===true?"Deactivate":"activate"}</Tooltip>}>
+                                                    <Link onClick={() => activateUser(user._id,user?.isActive)} className="iq-bg-info" to="#"><i className="ri-checkbox-circle-line"></i></Link>
                                                 </OverlayTrigger>
                                                 <OverlayTrigger placement="top"overlay={<Tooltip>Delete</Tooltip>}>
                                                     <Link onClick={() => deleteUser(user._id)} className="iq-bg-primary" to="#"><i className="ri-delete-bin-line"></i></Link>
