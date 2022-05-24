@@ -2,22 +2,22 @@ import React,{ useEffect } from 'react'
 import { Link} from 'react-router-dom'
 import {Container,Row,Col,OverlayTrigger,Tooltip} from 'react-bootstrap'
 import Card  from '../Card'
-import { getAllCategories, deleteCategoryAction } from "../../actions";
-import { GET_ALL_CATEGORIES_LOADING_ID } from "../../constants";
+import { getAllMessage, deleteCategoryAction } from "../../actions";
+import { SEND_MESSAGES_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { TableLoader } from "../reusableComponents";
 
 
-const CategoryList = () => { 
+const MessagesList = () => { 
     const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories.categories);
+  const messages = useSelector((state) => state.messages.messages);
   const isloading = useSelector(
-    (state) => state?.loader[GET_ALL_CATEGORIES_LOADING_ID]?.isLoading
+    (state) => state?.loader[SEND_MESSAGES_LOADING_ID]?.isLoading
   );
 
   useEffect(() => {
-    dispatch(getAllCategories());
+    dispatch(getAllMessage());
   }, [dispatch]);
 
   const  deleteCategory = (id) => {
@@ -34,7 +34,7 @@ const CategoryList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         dispatch(deleteCategoryAction({ id }));
-        dispatch(getAllCategories());
+        dispatch(getAllMessage());
         Swal.fire({
           title: "Deleted!",
           text: "Category has been deleted.",
@@ -53,11 +53,11 @@ const CategoryList = () => {
                             <Card>
                                 <Card.Header className="d-flex justify-content-between">
                                     <Card.Header.Title>
-                                        <h4 className="card-title">Category Lists</h4>
+                                        <h4 className="card-title">Messages Lists</h4>
                                     </Card.Header.Title>
-                                    <div className="iq-card-header-toolbar d-flex align-items-center">
-                                        <Link to="/add-category" className="btn btn-primary">Add Category</Link>
-                                    </div>
+                                    {/* <div className="iq-card-header-toolbar d-flex align-items-center">
+                                        <Link to="/add-category" className="btn btn-primary"></Link>
+                                    </div> */}
                                 </Card.Header>
                                 <Card.Body>
                                     <div className="table-view">
@@ -66,6 +66,9 @@ const CategoryList = () => {
                                                 <tr>
                                                     <th style={{width:"10%"}}>No</th>
                                                     <th style={{width:"20%"}}>Name</th>
+                                                    <th style={{width:"20%"}}>Email</th>
+                                                    <th style={{width:"20%"}}>Phone</th>
+                                                    <th style={{width:"20%"}}>Message</th>
                                                     <th style={{width:"20%"}}>Action</th>
                                                 </tr>
                                             </thead>
@@ -77,10 +80,13 @@ const CategoryList = () => {
                       </tr>
                     ) : (
                       <tbody>
-                        {categories?.data?.results?.map((category, index) => (
+                        {messages?.data?.results?.map((message, index) => (
                           <tr key={index}>
                             <td>{index + 1}</td>
-                            <td>{category.name}</td>
+                            <td>{message.name}</td>
+                            <td>{message.email}</td>
+                            <td>{message.PhoneNumber}</td>
+                            <td><span className={`${message?.status==="replied"?`${message?.status==="sent"?"badge iq-bg-info":"badge iq-bg-success"}`:"badge iq-bg-primary"}`}>{message.status}</span></td>
                             <td>
                               <div className="flex align-items-center list-user-action">
                                 <OverlayTrigger
@@ -89,22 +95,22 @@ const CategoryList = () => {
                                 >
                                   <Link
                                     className="iq-bg-warning"
-                                    to={`/edit-role/${category._id}`}
+                                    to={`/send-message/${message._id}`}
                                   >
                                     <i className="lar la-eye"></i>
                                   </Link>
                                 </OverlayTrigger>
-                                <OverlayTrigger
+                                {/* <OverlayTrigger
                                   placement="top"
                                   overlay={<Tooltip>Edit</Tooltip>}
                                 >
                                   <Link
                                     className="iq-bg-success"
-                                    to={`/edit-category/${category._id}`}
+                                    to={`/edit-message/${message._id}`}
                                   >
                                     <i className="ri-pencil-line"></i>
                                   </Link>
-                                </OverlayTrigger>
+                                </OverlayTrigger> */}
                                 <OverlayTrigger
                                   placement="top"
                                   overlay={<Tooltip>Delete</Tooltip>}
@@ -112,7 +118,7 @@ const CategoryList = () => {
                                   <Link
                                     className="iq-bg-primary"
                                     to="#"
-                                    onClick={() => deleteCategory(category._id)}
+                                    onClick={() => deleteCategory(message._id)}
                                   >
                                     <i className="ri-delete-bin-line"></i>
                                   </Link>
@@ -134,4 +140,4 @@ const CategoryList = () => {
             </>
     )
 }
-export default CategoryList;
+export default MessagesList;

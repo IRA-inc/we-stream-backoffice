@@ -9,4 +9,5 @@ export {appStatsSaga}from './appStatsSaga';
 export {ordersSaga} from './ordersSaga';
 export {notificationsSaga} from './notificationsSaga'
 export {PaymentsSaga} from './paymentSaga'
+export {messageSaga} from './messagesSaga'
 

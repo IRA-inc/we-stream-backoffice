@@ -6,9 +6,8 @@ import { TableLoader } from "../Loaders/tableLoader";
 import moment from "moment"
 import SearchBox from '../otherComponents/searchBox';
 import Paginations from '../otherComponents/pagination';
-import { checkEventOwnerRole } from '../../../helpers/checkRoleHelper';
 
-const PaymentTable = (props) => { 
+const PaymentDetailsTable = (props) => { 
    const {payments,search,title,handleInputChange,page,pages,onChange,isloading }=props
     return (
             <>  <Container fluid>
@@ -48,7 +47,7 @@ const PaymentTable = (props) => {
                       </tr>
                     ) : (
                       <tbody>
-                        {payments?.data?.objects.map((payment, index) => (
+                        {payments?.data?.map((payment, index) => (
                           <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{moment(payment.created_at).format("DD-MM-YYYY HH:mm")}</td>
@@ -64,7 +63,7 @@ const PaymentTable = (props) => {
                                 >
                                   <Link
                                     className="iq-bg-warning"
-                                    to={checkEventOwnerRole()?`/view-mypayment/${payment?.eventId?._id}`:`/view-payment/${payment?.eventId?._id}`}
+                                    to={`#`}
                                   >
                                     <i className="lar la-eye"></i>
                                   </Link>
@@ -100,6 +99,24 @@ const PaymentTable = (props) => {
                       </tbody>
                     )}
                                         </table>
+                              <div className="table-responsive-sm">
+                                 <table className="table table-striped">
+                                    <thead>
+                                       <tr colSpan={7} className>
+                                          <th scope="col">Total earn</th>
+                                          <th scope="col">totat payout</th>
+                                          <th scope="col">remaing cashout</th>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <tr>
+                                       <td><b>{payments?.totalAmount} Rwf</b></td>
+                                          <td>{payments?.totalPay} Rwf</td>
+                                          <td>{payments?.remainingAmount} Rwf</td>
+                                       </tr>
+                                    </tbody>
+                                 </table>
+                              </div>
                                         <div className="float-right pb-2">
                                                         <Paginations
                                                         page={page}
@@ -108,6 +125,7 @@ const PaymentTable = (props) => {
                                                         />
                                                          </div>
                                     </div>
+                                    
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -117,4 +135,4 @@ const PaymentTable = (props) => {
             </>
     )
 }
-export default PaymentTable;
+export default PaymentDetailsTable;

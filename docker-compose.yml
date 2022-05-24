@@ -24,13 +24,7 @@ services:
       # - /usr/src/node_modules/
       - ./../uploads:/usr/uploads/
 
-  # db:
-  #   image: mongo
-  #   container_name: westream
-  #   volumes:
-  #     - mongodata:/data/db
-  #   ports:
-  #     - '27017:27017'
-
-# volumes:
-#   mongodata:
+  networks:
+      default:
+          external:  
+              name: nginx-proxy

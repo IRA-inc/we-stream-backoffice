@@ -1,16 +1,16 @@
 import React,{ useEffect,useState } from 'react'
-import { allPayments, deleteCategoryAction } from "../../actions";
-import { ALL_PAYMENT_LOADING_ID } from "../../constants";
+import { allEventPayments, deleteCategoryAction } from "../../actions";
+import { ALL_PAYED_EVENT_PAYMENT_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
 import PaymentTable from '../reusableComponents/tables/paymentsTable';
 
-const PayoutList = () => { 
+const EventPaymentList = () => { 
     const dispatch = useDispatch();
     const [search, setSearch] = useState('');
     const [page, setPage] = React.useState(1);
-  const payments = useSelector((state) => state.payments.payments);
+  const payments = useSelector((state) => state.payments.eventPayments);
   const isloading = useSelector(
-    (state) => state?.loader[ALL_PAYMENT_LOADING_ID]?.isLoading
+    (state) => state?.loader[ALL_PAYED_EVENT_PAYMENT_LOADING_ID]?.isLoading
   );
 
   const handleInputChange = (event) => {
@@ -24,7 +24,7 @@ const handleChange = (event,value) => {
 
 
   useEffect(() => {
-    dispatch(allPayments({page,search}));
+    dispatch(allEventPayments({page,search}));
   }, [dispatch,page,search]);
 
 //   const  deleteCategory = (id) => {
@@ -67,4 +67,4 @@ const handleChange = (event,value) => {
             </>
     )
 }
-export default PayoutList;
+export default EventPaymentList;

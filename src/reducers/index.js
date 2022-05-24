@@ -8,7 +8,8 @@ import {events}from './eventReducer';
 import {appStatsReducer} from './appStatsReducer';
 import {orders} from './orderReducer';
 import {notifications} from './notifications';
-import {payments} from './payments'
+import {payments} from './payments';
+import {messages} from './messageReducer'
 
 import {ResponseMessage,ErrorResponseMessage}from './responseReducer'
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
     appStatsReducer,
     ErrorResponseMessage,
     ResponseMessage,
+    messages,
     payments,
     notifications,
   });

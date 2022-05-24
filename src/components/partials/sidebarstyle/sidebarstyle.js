@@ -144,12 +144,20 @@ const SidebarStyle = (props) => {
                             <Accordion.Toggle as={Button} href="#" eventKey="5" variant=" collapsed" data-toggle="collapse" aria-expanded="false"><i className="las la-film"></i><span>Payments</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
                             <Accordion.Collapse  className="submenu" eventKey="5">
                             <ul id="movie" className="iq-submenu" data-parent="#iq-sidebar-toggle">
-                            {checkAdminRole()?<li className={`${location.pathname === '/add-payment' ? 'active' : ''} `}><Link to="/add-payment"><i className="las la-user-plus"></i>Add Payment</Link></li>:""}
+                            {/* {checkAdminRole()?<li className={`${location.pathname === '/add-payment' ? 'active' : ''} `}><Link to="/add-payment"><i className="las la-user-plus"></i>Add Payment</Link></li>:""} */}
                             {/* {checkEventOwnerRole()? <li className={`${location.pathname === '/add-new-event' ? 'active' : ''} `}><Link to="/add-new-event"><i className="las la-user-plus"></i>Add Event</Link></li>:""} */}
                                {checkEventOwnerRole()?  <li className={`${location.pathname === '/my-payments' ? 'active' : ''} `}><Link to="/my-payments"><i className="las la-user-plus"></i>My payments</Link></li>:""}
-                               {checkEventOwnerRole()?  <li className={`${location.pathname === '/my-event-payments' ? 'active' : ''} `}><Link to="/my-orders"><i className="las la-user-plus"></i>My Events Payments</Link></li>:""}
+                               {checkEventOwnerRole()?  <li className={`${location.pathname === '/my-event-payments' ? 'active' : ''} `}><Link to="/my-event-payments"><i className="las la-user-plus"></i>My Events Payments</Link></li>:""}
                                 {checkAdminRole()? <li className={`${location.pathname === '/payout-events' ? 'active' : ''} `}><Link to="/payout-event"><i className="las la-user-plus"></i>Checkout payments</Link></li>:""}
                                 {checkAdminRole()? <li className={`${location.pathname === '/payment-list' ? 'active' : ''} `}><Link to="/payment-list"><i className="las la-eye"></i>Payments List</Link></li>:""}
+                            </ul>
+                            </Accordion.Collapse>
+                        </li>
+                        <li className={activeMenu === '6' ? 'active' : ''}>
+                            <Accordion.Toggle as={Button} href="#" eventKey="6" variant=" collapsed" data-toggle="collapse" aria-expanded="false"><i className="las la-film"></i><span>Messages</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
+                            <Accordion.Collapse  className="submenu" eventKey="6">
+                            <ul id="movie" className="iq-submenu" data-parent="#iq-sidebar-toggle">
+                                {checkAdminRole()? <li className={`${location.pathname === '/messages' ? 'active' : ''} `}><Link to="/messages"><i className="las la-user-plus"></i>Messages</Link></li>:""}
                             </ul>
                             </Accordion.Collapse>
                         </li>
