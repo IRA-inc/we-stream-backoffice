@@ -24,7 +24,7 @@ services:
       # - /usr/src/node_modules/
       - ./../uploads:/usr/uploads/
 
-  networks:
-      default:
-          external:  
-              name: nginx-proxy
+networks:
+  default:
+      external:  
+          name: nginx-proxy
