@@ -16,9 +16,10 @@ import  user04  from  '../../../assets/images/user/4.jpg'
 import  user05  from  '../../../assets/images/user/5.jpg'
 
 //img
-import logo from '../../../../src/assets/images/logo.png'
+import logo from '../../../../src/assets/images/vosplay-logo.jpg'
 import { signOut } from  '../../../actions';
 import { useSelector, useDispatch } from "react-redux";
+import Notification from './notifications'
 
 
 const  HeaderStyle1 =(props) =>{
@@ -76,62 +77,7 @@ const  HeaderStyle1 =(props) =>{
                                     <span className="bg-primary dots"></span>
                             </Dropdown.Toggle>
                             <Dropdown.Menu className="iq-sub-dropdown m-0" align="right">
-                                <Card className="shadow-none m-0">
-                                    <Card.Body className="p-0">
-                                        <div className="bg-primary p-3 d-flex justify-content-between">
-                                            <h5 className="mb-0 text-white">All Notifications</h5>
-                                        <small className="badge  badge-light float-right pt-1">4</small>
-                                        </div>
-                                        <Link to="#" className="iq-sub-card" >
-                                            <div className="media align-items-center">
-                                            <div>
-                                                <img className="avatar-40 rounded" src={user01} alt=""/>
-                                            </div>
-                                            <div className="media-body ml-3">
-                                                <h6 className="mb-0">Emma Watson Barry</h6>
-                                                <small className="float-right font-size-12 iq-text">Just Now</small>
-                                                <p className="mb-0 iq-text">95 MB</p>
-                                            </div>
-                                            </div>
-                                        </Link>
-                                        <Link to="#" className="iq-sub-card" >
-                                            <div className="media align-items-center">
-                                            <div>
-                                                <img className="avatar-40 rounded" src={user02} alt=""/>
-                                            </div>
-                                            <div className="media-body ml-3">
-                                                <h6 className="mb-0 ">New customer is join</h6>
-                                                <small className="float-right iq-text font-size-12">5 days ago</small>
-                                                <p className="mb-0 iq-text">Cyst Barry</p>
-                                            </div>
-                                            </div>
-                                        </Link>
-                                        <Link to="#" className="iq-sub-card" >
-                                            <div className="media align-items-center">
-                                            <div>
-                                                <img className="avatar-40 rounded" src={user03} alt=""/>
-                                            </div>
-                                            <div className="media-body ml-3">
-                                                <h6 className="mb-0 ">Two customer is left</h6>
-                                                <small className="float-right iq-text font-size-12">2 days ago</small>
-                                                <p className="mb-0 iq-text">Cyst Barry</p>
-                                            </div>
-                                            </div>
-                                        </Link>
-                                        <Link to="#" className="iq-sub-card" >
-                                            <div className="media align-items-center">
-                                            <div>
-                                                <img className="avatar-40 rounded" src={user04} alt=""/>
-                                            </div>
-                                            <div className="media-body ml-3">
-                                                <h6 className="mb-0 ">New Mail from Fenny</h6>
-                                                <small className="float-right iq-text font-size-12">3 days ago</small>
-                                                <p className="mb-0 iq-text">Cyst Barry</p>
-                                            </div>
-                                            </div>
-                                        </Link>
-                                    </Card.Body>
-                                </Card>    
+                            <Notification />
                             </Dropdown.Menu>
                         </Dropdown> 
                         <Dropdown as="li" className="nav-item nav-icon dropdown">

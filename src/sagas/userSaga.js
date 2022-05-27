@@ -6,6 +6,7 @@ import {
   GET_ONE_USER_LOADING_ID,
   DELETE_USER_LOADING_ID,
   EDIT_USER_LOADING_ID,
+  MY_PROFILE_LOADING_ID
 } from "../constants/loaders";
 import {
   CREATE_USER,
@@ -15,6 +16,8 @@ import {
   DISPLAY_ALL_DATA,
   DISPLAY_ONE_DATA,
   DISPLAY_ALL_STAFF,
+  DISPLAY_MY_PROFILE,
+  MY_PROFILE,
   DELETE_USER,
   GET_ALL_STAFFS,
   ACTIVATE_USER,
@@ -192,6 +195,23 @@ export function* activateUser(roleInput) {
   }
 }
 
+export function* getMyProfileAction() {
+ 
+  yield put(startLoading({ id: MY_PROFILE_LOADING_ID }));
+  try {
+    const response = yield call(ApiReq.get, `/api/v1/users/myprofile`);
+    yield put(stopLoading({ id: MY_PROFILE_LOADING_ID }));
+
+    yield put(actionType(DISPLAY_MY_PROFILE, response.data));
+
+    yield put(stopLoading({ id: MY_PROFILE_LOADING_ID }));
+  } catch (error) {
+    yield put(stopLoading({ id: MY_PROFILE_LOADING_ID }));
+    // yield put(ErrorResponse(error.response.data.Error));
+    yield put(setErrorNotification(error.response.data.Error));
+  }
+}
+
 export function* userSaga() {
   yield takeLatest(CREATE_USER, createNewUser);
   yield takeLatest(GET_ALL_USERS, getUsersAction);
@@ -200,5 +220,6 @@ export function* userSaga() {
   yield takeLatest(EDIT_USER, EditNewUser);
   yield takeLatest(DELETE_USER, DeleteUser);
   yield takeLatest(ACTIVATE_USER, activateUser);
+  yield takeLatest(MY_PROFILE, getMyProfileAction);
   
 }

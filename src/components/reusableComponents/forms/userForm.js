@@ -80,7 +80,7 @@ const UserForm = (props) => {
                         <Form.Control
                           type="text"
                           name="name"
-                          value={state.name}
+                          value={state?.name}
                           onChange={handleInputChange}
                           placeholder="Name"
                           required
@@ -90,7 +90,7 @@ const UserForm = (props) => {
                         <Form.Control
                           type="text"
                           name="username"
-                          value={state.username}
+                          value={state?.username}
                           onChange={handleInputChange}
                           placeholder="User name"
                           required
@@ -101,18 +101,18 @@ const UserForm = (props) => {
                           type="email"
                           id="email1"
                           name="email"
-                          value={state.email}
+                          value={state?.email}
                           onChange={handleInputChange}
                           placeholder="email"
                           required
                         />
                       </Form.Group>
-                      {state.password!==undefined&&
+                      {state?.password!==undefined&&
                       <Form.Group className="form-group">
                         <Form.Control
                           type="password"
                           name="password"
-                          value={state.password}
+                          value={state?.password}
                           onChange={handleInputChange}
                           placeholder="Password"
                           id="pwd"
@@ -125,7 +125,7 @@ const UserForm = (props) => {
                           type="tel"
                           id="exampleInputphone"
                           name="phoneNumber"
-                          value={state.phoneNumber}
+                          value={state?.phoneNumber}
                           onChange={handleInputChange}
                           placeholder="phone number"
                         />
@@ -169,8 +169,8 @@ const UserForm = (props) => {
                               type="radio"
                               id="customRadio6"
                               name="customRadio-1"
-                              checked={state.gender==="Male"?true:false}
-                              value={state.gender}
+                              checked={state?.gender==="Male"?true:false}
+                              value={state?.gender}
                               onChange={() => changeGender("Male")}
                               className="custom-control-input"
                             />
@@ -186,8 +186,8 @@ const UserForm = (props) => {
                               type="radio"
                               id="customRadio7"
                               name="customRadio-1"
-                              checked={state.gender==="Female"?true:false}
-                              value={state.gender}
+                              checked={state?.gender==="Female"?true:false}
+                              value={state?.gender}
                               onChange={() => changeGender("Female")}
                               className="custom-control-input"
                             />
@@ -201,7 +201,7 @@ const UserForm = (props) => {
                         </div>
                       </Form.Group>
                       <Form.Group className="form-group">
-                        {Errors.length > 0 ? (
+                        {Errors?.length > 0 ? (
                           <ErrorResponse
                             Error={Errors}
                             show={show}
@@ -210,7 +210,7 @@ const UserForm = (props) => {
                         ) : (
                           ""
                         )}
-                        {Errors.length === 0 && show === true ? (
+                        {Errors?.length === 0 && show === true ? (
                           <SuccessResponse
                             message={message}
                             show={show}

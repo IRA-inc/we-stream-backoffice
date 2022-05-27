@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useState} from 'react'
 import { getPendingEvents, deleteEventAction,activateEvent,approveEvent,cancelEvent } from "../../actions";
 import { GET_PENDING_EVENTS_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,16 +7,25 @@ import actionFunction from '../reusableComponents/otherComponents/actionFunction
 
 const PeningEventList = () => { 
   const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
+  const [page, setPage] = React.useState(1);
   const events = useSelector((state) => state.events.events);
   const isloading = useSelector(
     (state) => state?.loader[GET_PENDING_EVENTS_LOADING_ID]?.isLoading
   );
 
   useEffect(() => {
-    dispatch(getPendingEvents());
-  }, [dispatch]);
+    dispatch(getPendingEvents({search,page}));
+  }, [dispatch,search,page]);
 
-  
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setSearch(value);
+};
+
+const handleChange = (event,value) => {
+  setPage(value);
+};
 
   const deleteEvent = (id) => {
  actionFunction(id,deleteEventAction,getPendingEvents,"delete","Event has been deleted","Deleted",dispatch)
@@ -41,6 +50,11 @@ const PeningEventList = () => {
             cancelEvent={cancellingEvent}
             approveEvent={approvingEvent}
             events={events}
+            handleInputChange={handleInputChange}
+            search={search}
+            page={page}
+            pages={events?.data?.pages}
+            onChange={handleChange}
             isloading={isloading}
         />
 

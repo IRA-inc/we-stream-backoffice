@@ -91,6 +91,15 @@ import PeningEventList from '../components/events/pendingEvent';
 import AddMyEvent from '../components/events/AddMyEvent';
 import MyEventList from '../components/events/MyEvent';
 import OwnerEditEvent from '../components/events/editMyEvent';
+import OrdersList from '../components/orders/orders';
+import AddPayment from '../components/payments/addPayout';
+import PayoutList from '../components/payments/payoutPaymentsList';
+import EventPaymentList from '../components/payments/eventsPayments';
+import MyEventPaymentList from '../components/payments/myEventsPayment';
+import MyPaymentList from '../components/payments/myPayments';
+import PaymentDetails from '../components/payments/paymentDetails';
+import MyPaymentDetails from '../components/payments/myPaymentsDetails';
+
 
 //Movie
 import AddMovie from '../views/movie/add-movie';
@@ -124,6 +133,8 @@ import CommingSoon  from  '../views/pages/commingsoon'
 //Layouts
 import Layout from '../layouts/layout'
 import BlankLayout from '../layouts/blanklayout';
+import MessagesList from '../components/messages/messages';
+import SendMessage from '../components/messages/respondMessage';
 
 
 
@@ -164,6 +175,12 @@ const Layout1Route = (props) => {
                     <Route path="/user-list" element={<UserList />} />
                     <Route path="/edit-user/:id" element={<EditUser/>} />
 
+                    
+                    {/* messafes */}
+                    {/* <Route path="/add-user" element={<AddUser />} /> */}
+                    <Route path="/messages" element={<MessagesList />} />
+                    {/* <Route path="/edit-user/:id" element={<EditUser/>} /> */}
+
                     {/* user */}
                     <Route path="/add-event" element={<AddEvent />} />
                     <Route path="/event-list" element={<EventList />} />
@@ -172,6 +189,17 @@ const Layout1Route = (props) => {
                     <Route path="/add-new-event" element={<AddMyEvent/>} />
                     <Route path="/edit-event/:id" element={<EditUserEvent/>} />
                     <Route path="/edit-myevent/:id" element={<OwnerEditEvent/>} />
+                    <Route  path="/my-orders" element={<OrdersList/>}/>
+                    <Route  path="/payout-event/:id" element={<AddPayment />}/>
+                    <Route  path="/payout-event" element={<PayoutList />}/>
+                    <Route  path="/payment-list" element={<EventPaymentList />}/>
+                    <Route path="/my-event-payments" element={<MyEventPaymentList />}/>
+                    <Route path="/my-payments" element={<MyPaymentList />}/>
+                    <Route path="/view-payment/:id" element={<PaymentDetails />}/>
+                    <Route path="/view-mypayment/:id" element={<MyPaymentDetails />}/>
+
+                     {/* App */}
+                    <Route path="/send-message/:id" element={<SendMessage />}/>
 
                     {/* App */}
                     <Route path="/user-profile"         element={<UserProfile />} />

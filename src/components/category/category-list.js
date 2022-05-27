@@ -77,7 +77,7 @@ const CategoryList = () => {
                       </tr>
                     ) : (
                       <tbody>
-                        {categories?.data?.results.map((category, index) => (
+                        {categories?.data?.results?.map((category, index) => (
                           <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{category.name}</td>

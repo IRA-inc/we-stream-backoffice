@@ -19,6 +19,7 @@ const AddEvent = () => {
     price: 0,
     paymentType: "",
     description: "",
+    special:""
   });
 
   const [show, setShow] = useState(false);
@@ -113,6 +114,13 @@ const AddEvent = () => {
     });
   };
 
+  const changeSpecial = (value) => {
+      setEvent({
+        ...eventdata,
+      special:value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -163,6 +171,7 @@ const AddEvent = () => {
         isLoading={isLoading}
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
+        changeSpecial={changeSpecial}
         show={show}
         setShow={setShow}
         Errors={Errors}

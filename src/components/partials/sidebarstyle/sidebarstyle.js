@@ -9,7 +9,7 @@ import Scrollbar from 'smooth-scrollbar'
 // import {getDarkMode} from '../../../../store/mode'
 
 //img
-import logo from '../../../../src/assets/images/logo.png'
+import logo from '../../../../src/assets/images/vosplay-logo.jpg'
 import {checkSuperAdminRole,checkAdminRole,checkEventOwnerRole} from "../../../helpers/checkRoleHelper"
 
 
@@ -63,7 +63,7 @@ const SidebarStyle = (props) => {
                     <Link to="/" className="header-logo">
                     <img src={logo} className="img-fluid rounded-normal" alt=""/>
                     <div className="logo-title">
-                        <span className="text-primary text-uppercase">Streamit</span>
+                        <span className="text-primary text-uppercase">Vosplay</span>
                     </div>
                     </Link>
                     <div className="iq-menu-bt-sidebar">
@@ -127,15 +127,37 @@ const SidebarStyle = (props) => {
                             </ul>
                             </Accordion.Collapse>
                         </li>:""}
-                        <li className={activeMenu === '3' ? 'active' : ''}>
-                            <Accordion.Toggle as={Button} href="#" eventKey="3" variant=" collapsed" data-toggle="collapse" aria-expanded="false"><i className="las la-film"></i><span>Event</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
-                            <Accordion.Collapse  className="submenu" eventKey="3">
+                        <li className={activeMenu === '4' ? 'active' : ''}>
+                            <Accordion.Toggle as={Button} href="#" eventKey="4" variant=" collapsed" data-toggle="collapse" aria-expanded="false"><i className="las la-film"></i><span>Event</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
+                            <Accordion.Collapse  className="submenu" eventKey="4">
                             <ul id="movie" className="iq-submenu" data-parent="#iq-sidebar-toggle">
-                            {checkAdminRole()?<li className={`${location.pathname === '/add-event' ? 'active' : ''} `}><Link to="/add-event"><i className="las la-user-plus"></i>Add Event</Link></li>:""}
-                            {checkEventOwnerRole()? <li className={`${location.pathname === '/add-new-event' ? 'active' : ''} `}><Link to="/add-new-event"><i className="las la-user-plus"></i>Add Event</Link></li>:""}
+                            {/* {checkAdminRole()?<li className={`${location.pathname === '/add-event' ? 'active' : ''} `}><Link to="/add-event"><i className="las la-user-plus"></i>Add Event</Link></li>:""}
+                            {checkEventOwnerRole()? <li className={`${location.pathname === '/add-new-event' ? 'active' : ''} `}><Link to="/add-new-event"><i className="las la-user-plus"></i>Add Event</Link></li>:""} */}
                                {checkEventOwnerRole()?  <li className={`${location.pathname === '/my-events' ? 'active' : ''} `}><Link to="/my-events"><i className="las la-user-plus"></i>My Events</Link></li>:""}
+                               {checkEventOwnerRole()?  <li className={`${location.pathname === '/my-orders' ? 'active' : ''} `}><Link to="/my-orders"><i className="las la-user-plus"></i>My Events Orders</Link></li>:""}
                                 {checkAdminRole()? <li className={`${location.pathname === '/pending-event' ? 'active' : ''} `}><Link to="/pending-event"><i className="las la-user-plus"></i>Pending Events</Link></li>:""}
                                 {checkAdminRole()? <li className={`${location.pathname === '/event-list' ? 'active' : ''} `}><Link to="/event-list"><i className="las la-eye"></i>Events List</Link></li>:""}
+                            </ul>
+                            </Accordion.Collapse>
+                        </li>
+                        <li className={activeMenu === '5' ? 'active' : ''}>
+                            <Accordion.Toggle as={Button} href="#" eventKey="5" variant=" collapsed" data-toggle="collapse" aria-expanded="false"><i className="las la-film"></i><span>Payments</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
+                            <Accordion.Collapse  className="submenu" eventKey="5">
+                            <ul id="movie" className="iq-submenu" data-parent="#iq-sidebar-toggle">
+                            {/* {checkAdminRole()?<li className={`${location.pathname === '/add-payment' ? 'active' : ''} `}><Link to="/add-payment"><i className="las la-user-plus"></i>Add Payment</Link></li>:""} */}
+                            {/* {checkEventOwnerRole()? <li className={`${location.pathname === '/add-new-event' ? 'active' : ''} `}><Link to="/add-new-event"><i className="las la-user-plus"></i>Add Event</Link></li>:""} */}
+                               {checkEventOwnerRole()?  <li className={`${location.pathname === '/my-payments' ? 'active' : ''} `}><Link to="/my-payments"><i className="las la-user-plus"></i>My payments</Link></li>:""}
+                               {checkEventOwnerRole()?  <li className={`${location.pathname === '/my-event-payments' ? 'active' : ''} `}><Link to="/my-event-payments"><i className="las la-user-plus"></i>My Events Payments</Link></li>:""}
+                                {checkAdminRole()? <li className={`${location.pathname === '/payout-events' ? 'active' : ''} `}><Link to="/payout-event"><i className="las la-user-plus"></i>Checkout payments</Link></li>:""}
+                                {checkAdminRole()? <li className={`${location.pathname === '/payment-list' ? 'active' : ''} `}><Link to="/payment-list"><i className="las la-eye"></i>Payments List</Link></li>:""}
+                            </ul>
+                            </Accordion.Collapse>
+                        </li>
+                        <li className={activeMenu === '6' ? 'active' : ''}>
+                            <Accordion.Toggle as={Button} href="#" eventKey="6" variant=" collapsed" data-toggle="collapse" aria-expanded="false"><i className="las la-film"></i><span>Messages</span><i className="ri-arrow-right-s-line iq-arrow-right"></i></Accordion.Toggle>
+                            <Accordion.Collapse  className="submenu" eventKey="6">
+                            <ul id="movie" className="iq-submenu" data-parent="#iq-sidebar-toggle">
+                                {checkAdminRole()? <li className={`${location.pathname === '/messages' ? 'active' : ''} `}><Link to="/messages"><i className="las la-user-plus"></i>Messages</Link></li>:""}
                             </ul>
                             </Accordion.Collapse>
                         </li>

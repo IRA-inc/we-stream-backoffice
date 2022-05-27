@@ -16,7 +16,6 @@ const GeneralStats=()=>{
   useEffect(() => {
     dispatch(getAppStats());
   }, [dispatch]);
-  console.log("appStats===>", appStats)
     return(
     <>
        <Row>

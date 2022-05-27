@@ -7,20 +7,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Autoplay  } from 'swiper';
 import 'swiper/swiper-bundle.css';
 import Select from 'react-select'
-
-// img
-import dash01 from '../../../assets/images/dashboard/01.jpg'
-import dash02 from '../../../assets/images/dashboard/02.jpg'
-import dash03 from '../../../assets/images/dashboard/03.jpg'
-import dash04 from '../../../assets/images/dashboard/04.jpg'
-import dash05 from '../../../assets/images/dashboard/05.jpg'
-import dash06 from '../../../assets/images/dashboard/06.jpg'
-
-import mt01 from '../../../assets/images/movie-thumb/01.jpg'
-import mt04 from '../../../assets/images/movie-thumb/01.jpg'
-import mt05 from '../../../assets/images/movie-thumb/01.jpg'
-import mt07 from '../../../assets/images/movie-thumb/01.jpg'
 import MyDataStats from './MyDataStats';
+import OrdersList from '../../orders/orders';
+import MyTopFiveEvents from './myTopFiveEvent'
 
 SwiperCore.use([Navigation, Autoplay ]); 
 
@@ -159,148 +148,7 @@ const EventOwnerDashbord = () => {
            <Row>
               <Col lg="8">
              < MyDataStats />
-                 <Card id="slider1">
-                    <Card.Header className="d-flex justify-content-between align-items-center">
-                           <div>
-                              <h4 className="card-title m-0">Top Rated Item </h4>
-                           </div>
-                           <div className="" id="swiper">
-                              <div className="swiper-button swiper-button-prev">Previous</div>
-                              <div className="swiper-button swiper-button-next">Next</div>
-                           </div>
-                    </Card.Header>
-                    <Card.Body>
-                       <Swiper
-                           navigation={{
-                              prevEl: '.swiper-button-prev',
-                              nextEl: '.swiper-button-next'
-                           }}
-                           breakpoints={{
-                              320: {   slidesPerView: 1},                
-                              550: { slidesPerView: 2 },
-                              991: { slidesPerView: 3 },
-                              1400: { slidesPerView: 4 },
-                           }}
-                           loop={true}
-                           className="list-unstyled row top-rated-item mb-0 iq-rtl-direction"
-                        >
-                          <SwiperSlide className="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
-                             <Card className="mb-0">
-                                <Card.Body className="p-0">
-                                   <div className="iq-thumb">
-                                      <Link to="#">
-                                         <img src={dash01} className="img-fluid w-100 img-border-radius" alt=""/>
-                                      </Link>
-                                   </div>
-                                   <div className="iq-feature-list">
-                                      <h6 className="font-weight-600 mb-0">The Last Breath</h6>
-                                      <p className="mb-0 mt-2">T.v show</p>
-                                      <div className="d-flex align-items-center my-2 iq-ltr-direction">
-                                         <p className="mb-0 mr-2"><i className="lar la-eye mr-1"></i> 134</p>
-                                         <p className="mb-0 "><i className="las la-download ml-2"></i> 30 k</p>
-                                      </div>
-                                   </div>
-                                </Card.Body>
-                             </Card>
-                          </SwiperSlide>
-                          <SwiperSlide className="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
-                             <Card className="mb-0">
-                                <Card.Body className="p-0">
-                                   <div className="iq-thumb">
-                                      <Link to="#">
-                                         <img src={dash02} className="img-fluid w-100 img-border-radius" alt=""/>
-                                      </Link>
-                                   </div>
-                                   <div className="iq-feature-list">
-                                      <h6 className="font-weight-600 mb-0">Last Night</h6>
-                                      <p className="mb-0 mt-2">Movie</p>
-                                      <div className="d-flex align-items-center my-2 iq-ltr-direction">
-                                         <p className="mb-0 mr-2"><i className="lar la-eye mr-1"></i> 133</p>
-                                         <p className="mb-0 "><i className="las la-download ml-2"></i> 20 k</p>
-                                      </div>
-                                   </div>
-                                </Card.Body>
-                             </Card>
-                          </SwiperSlide>
-                          <SwiperSlide className="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
-                             <Card className="mb-0">
-                                <Card.Body className="p-0">
-                                   <div className="iq-thumb">
-                                      <Link to="#">
-                                         <img src={dash03} className="img-fluid w-100 img-border-radius" alt=""/>
-                                      </Link>
-                                   </div>
-                                   <div className="iq-feature-list">
-                                      <h6 className="font-weight-600 mb-0">Jeon Woochie</h6>
-                                      <p className="mb-0 mt-2">Movie</p>
-                                      <div className="d-flex align-items-center my-2 iq-ltr-direction">
-                                         <p className="mb-0 mr-2"><i className="lar la-eye mr-1"></i> 222</p>
-                                         <p className="mb-0 "><i className="las la-download ml-2"></i> 40 k</p>
-                                      </div>
-                                   </div>
-                                </Card.Body>
-                             </Card>
-                          </SwiperSlide>
-                          <SwiperSlide className="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
-                             <Card className="mb-0">
-                                <Card.Body className="p-0">
-                                   <div className="iq-thumb">
-                                      <Link to="#">
-                                         <img src={dash04} className="img-fluid w-100 img-border-radius" alt=""/>
-                                      </Link>
-                                   </div>
-                                   <div className="iq-feature-list">
-                                      <h6 className="font-weight-600 mb-0">Dino Land</h6>
-                                      <p className="mb-0 mt-2">T.v show</p>
-                                      <div className="d-flex align-items-center my-2 iq-ltr-direction">
-                                         <p className="mb-0 mr-2"><i className="lar la-eye mr-1"></i> 122</p>
-                                         <p className="mb-0 "><i className="las la-download ml-2"></i> 25 k</p>
-                                      </div>
-                                   </div>
-                                </Card.Body>
-                             </Card>
-                          </SwiperSlide>
-                          <SwiperSlide className="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
-                             <Card className="mb-0">
-                                <Card.Body className="p-0">
-                                   <div className="iq-thumb">
-                                      <Link to="#">
-                                         <img src={dash05} className="img-fluid w-100 img-border-radius" alt=""/>
-                                      </Link>
-                                   </div>
-                                   <div className="iq-feature-list">
-                                      <h6 className="font-weight-600 mb-0">Last Race</h6>
-                                      <p className="mb-0 mt-2">T.v show</p>
-                                      <div className="d-flex align-items-center my-2 iq-ltr-direction">
-                                         <p className="mb-0 mr-2"><i className="lar la-eye mr-1"></i> 144</p>
-                                         <p className="mb-0 "><i className="las la-download ml-2"></i> 35 k</p>
-                                      </div>
-                                   </div>
-                                </Card.Body>
-                             </Card>
-                          </SwiperSlide>
-                          <SwiperSlide className="col-sm-6 col-lg-4 col-xl-3 iq-rated-box">
-                             <Card className="mb-0">
-                                <Card.Body className="p-0">
-                                   <div className="iq-thumb">
-                                      <Link to="#">
-                                         <img src={dash06} className="img-fluid w-100 img-border-radius" alt=""/>
-                                      </Link>
-                                   </div>
-                                   <div className="iq-feature-list">
-                                      <h6 className="font-weight-600 mb-0">Opend Dead Shot</h6>
-                                      <p className="mb-0 mt-2">T.v show</p>
-                                      <div className="d-flex align-items-center my-2 iq-ltr-direction">
-                                         <p className="mb-0 mr-2"><i className="lar la-eye mr-1"></i> 134</p>
-                                         <p className="mb-0 "><i className="las la-download ml-2"></i> 30 k</p>
-                                      </div>
-                                   </div>
-                                </Card.Body>
-                             </Card>
-                          </SwiperSlide>
-                          </Swiper>
-                    </Card.Body>
-                 </Card>
+              <MyTopFiveEvents />
               </Col>
               <Col lg="4">
                  <Card className="iq-card-block iq-card-stretch iq-card-height">
@@ -482,7 +330,8 @@ const EventOwnerDashbord = () => {
                  </Card>
               </Col>
               <Col sm="12">
-                 <Card>
+              <OrdersList />
+                 {/* <Card>
                     <Card.Header className="d-flex justify-content-between">
                        <Card.Header.Title>
                           <h4 className="card-title">Recently Viewed Items</h4>
@@ -613,7 +462,7 @@ const EventOwnerDashbord = () => {
                           </table>
                        </div>
                     </Card.Body>
-                 </Card>
+                 </Card> */}
               </Col>
            </Row>
         </Container>
