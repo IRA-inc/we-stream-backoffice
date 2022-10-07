@@ -49,10 +49,13 @@ export function* createNewRole(roleInput) {
   }
 }
 
-export function* getRolesAction() {
+export function* getRolesAction(searchInput) {
+  const {
+    payload: { search,page },
+  } = searchInput;
   yield put(startLoading({ id: GET_ALL_ROLES_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, "/api/v1/roles");
+    const response = yield call(ApiReq.get, `/api/v1/roles?search=${search}&page=${page}&limit=${100}`);
     yield put(stopLoading({ id: GET_ALL_ROLES_LOADING_ID }));
 
     yield put(actionType(DISPLAY_ALL_DATA, response.data));

@@ -54,7 +54,7 @@ const handleChange = (event,value) => {
     return (
             <> 
                <PaymentTable
-               title="My Payments Lists"
+               title="My Earnings payout history"
                payments={payments}
                isloading={isloading}
                page={page}
@@ -62,7 +62,6 @@ const handleChange = (event,value) => {
                pages={payments?.data?.pages}
                handleInputChange={handleInputChange}
                />
-
             </>
     )
 }

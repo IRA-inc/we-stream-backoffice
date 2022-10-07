@@ -19,6 +19,8 @@ const AddUser = () => {
   });
 
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(1);
   const [Errors, setErros] = useState("");
   const dispatch = useDispatch();
   const roles = useSelector((state) => state.Roles.roles);
@@ -76,8 +78,8 @@ const AddUser = () => {
  
 
   useEffect(() => {
-    dispatch(getAllRoles());
-  }, [dispatch]);
+    dispatch(getAllRoles({ search, page }));
+  }, [dispatch, search, page]);
 
   useEffect(() => {
     // dispatch(getAllRoles());
@@ -106,7 +108,7 @@ const AddUser = () => {
           show={show}
           setShow={setShow}
           Errors={Errors}
-          roles={roles?.data?.results}
+          roles={roles?.data?.objects}
           changeGender={changeGender}
           handleselectedApprovalLevel={handleselectedApprovalLevel}
           handleselectedUserRoles={handleselectedUserRoles}

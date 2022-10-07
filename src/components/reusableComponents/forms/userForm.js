@@ -9,6 +9,7 @@ const { ErrorResponse, SuccessResponse } = responseComponent;
 
 const UserForm = (props) => {
   const {
+    userProfile,
     state,
     handleInputChange,
     handleSubmit,
@@ -130,6 +131,8 @@ const UserForm = (props) => {
                           placeholder="phone number"
                         />
                       </Form.Group>
+                      {userProfile ===true?"":   
+                      <>         
                       <Form.Group>
                         <Select
                           isMulti
@@ -144,7 +147,9 @@ const UserForm = (props) => {
                           classNamePrefix="select2-selection"
                           styles={customStyles}
                         />
-                      </Form.Group>
+                          </Form.Group></>   }
+{userProfile ===true?"":  
+<>              
 <Form.Group>
     
                         <Select
@@ -160,7 +165,9 @@ const UserForm = (props) => {
                           classNamePrefix="select2-selection"
                           styles={customStyles}
                         />
-                      </Form.Group>                      
+                      </Form.Group> 
+                      </>   
+}                     
                       <Form.Group className="radio-box">
                         <label>Gender</label>
                         <div className="radio-btn">

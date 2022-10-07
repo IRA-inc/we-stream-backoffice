@@ -11,6 +11,7 @@ import {
   ACTIVATE_EVENT_LOADING_ID,
   CANCEL_EVENT_LOADING_ID,
   APPROVE_EVENT_LOADING_ID,
+  UPDATE_STREAMING_KEY_LOADING_ID,
 } from "../constants/loaders";
 import {
   CREATE_EVENT,
@@ -27,6 +28,7 @@ import {
   APPROVE_EVENT,
   OWNER_CREATE_EVENT,
   OWNER_EDIT_EVENT,
+  UPDATE_STREAMING_KEY,
   setNotificationMessage,
   setErrorNotification,
   clearNotificationMessage,
@@ -275,6 +277,22 @@ export function* cancelEvent(eventInput) {
   }
 }
 
+export function* updateEventKey(eventInput) {
+  const {
+    payload: { id },
+  } = eventInput;
+  yield put(startLoading({ id: UPDATE_STREAMING_KEY_LOADING_ID }));
+  try {
+    yield call(ApiReq.patch, `/api/v1/events/updateStreamingKey/${id}`);
+    yield put(stopLoading({ id: UPDATE_STREAMING_KEY_LOADING_ID }));
+    //dismiss loading
+    yield put(stopLoading({ id: UPDATE_STREAMING_KEY_LOADING_ID }));
+  } catch (error) {
+    yield put(stopLoading({ id: UPDATE_STREAMING_KEY_LOADING_ID }));
+    yield put(setErrorNotification(error.response.data.Error));
+  }
+}
+
 
 export function* eventSaga() {
   yield takeLatest(CREATE_EVENT, createNewEvent);
@@ -289,6 +307,7 @@ export function* eventSaga() {
   yield takeLatest(ACTIVATE_EVENT, activateEvent);
   yield takeLatest(CANCEL_EVENT, approveEvent);
   yield takeLatest(APPROVE_EVENT, cancelEvent);
+  yield takeLatest(UPDATE_STREAMING_KEY, updateEventKey);
   
 
 }

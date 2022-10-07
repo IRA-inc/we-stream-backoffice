@@ -20,3 +20,4 @@ export * from './appStatsAction';
 export * from './ordersAction';
 export * from './paymentActions';
 export * from './messagesAction';
+export * from './addActions';

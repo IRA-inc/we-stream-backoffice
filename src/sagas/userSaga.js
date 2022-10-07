@@ -6,12 +6,14 @@ import {
   GET_ONE_USER_LOADING_ID,
   DELETE_USER_LOADING_ID,
   EDIT_USER_LOADING_ID,
-  MY_PROFILE_LOADING_ID
+  MY_PROFILE_LOADING_ID,
+  EDIT_PROFILE_LOADING_ID
 } from "../constants/loaders";
 import {
   CREATE_USER,
   GET_ALL_USERS,
   GET_ONE_USER,
+  EDIT_PROFILE,
   EDIT_USER,
   DISPLAY_ALL_DATA,
   DISPLAY_ONE_DATA,
@@ -71,10 +73,13 @@ export function* createNewUser(userInput) {
   }
 }
 
-export function* getUsersAction() {
+export function* getUsersAction(searchInput) {
+  const {
+    payload: { search,page },
+  } = searchInput;
   yield put(startLoading({ id: GET_ALL_USERS_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, "/api/v1/users");
+    const response = yield call(ApiReq.get, `/api/v1/users?search=${search}&page=${page}`);
     yield put(stopLoading({ id: GET_ALL_USERS_LOADING_ID }));
 
     yield put(actionType(DISPLAY_ALL_DATA, response.data));
@@ -89,7 +94,7 @@ export function* getUsersAction() {
 export function* getStaffsAction() {
   yield put(startLoading({ id: GET_ALL_USERS_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, "/api/v1/users/staffs");
+    const response = yield call(ApiReq.get, `/api/v1/users/staffs?limit=${100000}`);
     yield put(stopLoading({ id: GET_ALL_USERS_LOADING_ID }));
 
     yield put(actionType(DISPLAY_ALL_STAFF, response.data));
@@ -163,6 +168,44 @@ export function* EditNewUser(userInput) {
   }
 }
 
+export function* EditProfile(userInput) {
+  console.log("sagaaction=====>")
+  const {
+    payload:{
+      user:{
+        name,
+        username,
+        email,
+        phoneNumber,
+        gender,
+    },
+  },
+  } = userInput;
+  yield put(startLoading({ id: EDIT_PROFILE_LOADING_ID }));
+  try {
+    const response = yield call(ApiReq.patch, `/api/v1/users/updateProfile`,{name,
+      username,
+      email,
+      phoneNumber,
+      gender,
+    });
+    yield put(stopLoading({ id: EDIT_PROFILE_LOADING_ID }));
+    if (response.data.message) {
+      yield put(setNotificationMessage(response.data.message));
+    } else {
+      yield put(setErrorNotification(response.data.Error));
+    }
+    //dismiss loading
+    yield put(stopLoading({ id: EDIT_PROFILE_LOADING_ID }));
+    yield put(clearNotificationMessage());
+  } catch (error) {
+    console.log("response====>",error);
+    yield put(stopLoading({ id: EDIT_PROFILE_LOADING_ID }));
+    yield put(setErrorNotification(error.response.data.Error));
+    yield put(clearErrorNotification());
+  }
+}
+
 export function* DeleteUser(roleInput) {
   const {
     payload: { id },
@@ -221,5 +264,6 @@ export function* userSaga() {
   yield takeLatest(DELETE_USER, DeleteUser);
   yield takeLatest(ACTIVATE_USER, activateUser);
   yield takeLatest(MY_PROFILE, getMyProfileAction);
+  yield takeLatest(EDIT_PROFILE, EditProfile);
   
 }

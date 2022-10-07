@@ -15,7 +15,8 @@ import {
   PAY_WITH_MOMO,
   PAY_WITH_CARDS,
   VERIFY_CARD_PAYMENT,
-  SET_PAYMENT_RESPONSE
+  SET_PAYMENT_RESPONSE,
+  UPDATE_STREAMING_KEY
 } from "./actionTypes";
 
 export const createEvent = makeActionCreator(CREATE_EVENT, "payload");
@@ -40,3 +41,4 @@ export const payWithMomo = makeActionCreator(PAY_WITH_MOMO, "payload");
 export const payWithCards = makeActionCreator(PAY_WITH_CARDS, "payload");
 export const verifyCardPayment = makeActionCreator(VERIFY_CARD_PAYMENT, "payload");
 export const setPaymentResponse = makeActionCreator(SET_PAYMENT_RESPONSE, 'payload');
+export const updateStreaminKey = makeActionCreator(UPDATE_STREAMING_KEY, 'payload');

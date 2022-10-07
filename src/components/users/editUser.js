@@ -18,6 +18,8 @@ const EditUser = () => {
   });
   const { id } = useParams();
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(1);
   const [Errors, setErros] = useState("");
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.users.user);
@@ -72,10 +74,12 @@ const EditUser = () => {
     e.preventDefault();
     await dispatch(editUser({user,id}));
   };
- 
+  
+  useEffect(() => {
+    dispatch(getAllRoles({ search, page }));
+  }, [dispatch, search, page]);
 
   useEffect(() => {
-    dispatch(getAllRoles());
     dispatch(getOneUser({ id }));
   }, [dispatch,id]);
 
@@ -114,7 +118,7 @@ const EditUser = () => {
           show={show}
           setShow={setShow}
           Errors={Errors}
-          roles={roles?.data?.results}
+          roles={roles?.data?.objects}
           changeGender={changeGender}
           handleselectedApprovalLevel={handleselectedApprovalLevel}
           handleselectedUserRoles={handleselectedUserRoles}

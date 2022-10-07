@@ -146,11 +146,11 @@ const EventOwnerDashbord = () => {
        <> 
         <Container fluid>
            <Row>
-              <Col lg="8">
+              <Col lg="12">
              < MyDataStats />
               <MyTopFiveEvents />
               </Col>
-              <Col lg="4">
+              {/* <Col lg="4">
                  <Card className="iq-card-block iq-card-stretch iq-card-height">
                     <div className="iq-card-header">
                        <Card.Header.Title>
@@ -219,10 +219,10 @@ const EventOwnerDashbord = () => {
                        </Row>
                     </Card.Body>
                  </Card>
-              </Col>
+              </Col> */}
            </Row>
            <Row>
-              <Col sm="12" lg="4">
+              {/* <Col sm="12" lg="4">
                  <Card className="iq-card-block iq-card-stretch iq-card-height">
                     <Card.Header className="d-flex align-items-center justify-content-between">
                        <Card.Header.Title>
@@ -233,8 +233,8 @@ const EventOwnerDashbord = () => {
                     <Chart  options={chart2.options} series={chart2.series} type="bar" height="230"  />
                     </Card.Body>
                  </Card>
-              </Col>
-              <Col lg="8">
+              </Col> */}
+              {/* <Col lg="8">
                  <Card className="iq-card-block iq-card-stretch iq-card-height">
                     <Card.Header className="align-items-center">
                        <Card.Header.Title>
@@ -328,7 +328,7 @@ const EventOwnerDashbord = () => {
                        </Col>
                     </Card.Body>
                  </Card>
-              </Col>
+              </Col> */}
               <Col sm="12">
               <OrdersList />
                  {/* <Card>

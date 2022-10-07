@@ -10,6 +10,7 @@ import {orders} from './orderReducer';
 import {notifications} from './notifications';
 import {payments} from './payments';
 import {messages} from './messageReducer'
+import {advertesments} from './advertisements'
 
 import {ResponseMessage,ErrorResponseMessage}from './responseReducer'
 
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
     messages,
     payments,
     notifications,
+    advertesments,
   });
   
 export default rootReducer;

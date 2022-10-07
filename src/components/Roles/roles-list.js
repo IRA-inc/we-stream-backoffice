@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Card from "../../components/Card";
@@ -7,17 +7,21 @@ import { GET_ALL_ROLES_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { TableLoader } from "../reusableComponents";
+import Paginations from "../reusableComponents/otherComponents/pagination";
+import SearchBox from "../reusableComponents/otherComponents/searchBox";
 
 const RolesList = (props) => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(1);
   const roles = useSelector((state) => state.Roles.roles);
   const isloading = useSelector(
     (state) => state?.loader[GET_ALL_ROLES_LOADING_ID]?.isLoading
   );
 
   useEffect(() => {
-    dispatch(getAllRoles());
-  }, [dispatch]);
+    dispatch(getAllRoles({ search, page }));
+  }, [dispatch, search, page]);
 
   const deleteRole = (id) => {
     Swal.fire({
@@ -45,6 +49,15 @@ const RolesList = (props) => {
     });
   };
 
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setSearch(value);
+  };
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <>
       <Container fluid>
@@ -56,13 +69,17 @@ const RolesList = (props) => {
                   <h4 className="card-title">Role Lists</h4>
                 </Card.Header.Title>
                 <div className="iq-card-header-toolbar d-flex align-items-center">
+                <SearchBox
+                        search={search}
+                        handleInputChange={handleInputChange}
+                        />
                   <Link to="/add-role" className="btn btn-primary">
                     Add Role
                   </Link>
                 </div>
               </Card.Header>
               <Card.Body>
-                <div className="table-view">
+              <div className="table-responsive">
                   <table
                     className="data-tables table movie_table "
                     style={{ width: "100%" }}
@@ -82,9 +99,9 @@ const RolesList = (props) => {
                       </tr>
                     ) : (
                       <tbody>
-                        {roles?.data?.results?.map((rolesData, index) => (
+                        {roles?.data?.objects?.map((rolesData, index) => (
                           <tr key={index}>
-                            <td>{index + 1}</td>
+                            <td>{(page - 1) * 10 + index + 1}</td>
                             <td>{rolesData.name}</td>
                             <td>
                               <div className="flex align-items-center list-user-action">
@@ -129,6 +146,13 @@ const RolesList = (props) => {
                       </tbody>
                     )}
                   </table>
+                  <div className="float-right pb-2">
+                    <Paginations
+                      page={page}
+                      pages={roles?.data?.pages}
+                      onChange={handleChange}
+                    />
+                  </div>
                 </div>
               </Card.Body>
             </Card>

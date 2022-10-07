@@ -48,7 +48,7 @@ const PaymentTable = (props) => {
                       </tr>
                     ) : (
                       <tbody>
-                        {payments?.data?.objects.map((payment, index) => (
+                        {payments?.data?.objects?.map((payment, index) => (
                           <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{moment(payment.created_at).format("DD-MM-YYYY HH:mm")}</td>

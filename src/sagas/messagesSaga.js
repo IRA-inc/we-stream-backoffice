@@ -51,10 +51,13 @@ export function* createNewMessage(roleInput) {
   }
 }
 
-export function* getMessagesAction() {
+export function* getMessagesAction(searchInput) {
+  const {
+    payload: { search,page },
+  } = searchInput;
   yield put(startLoading({ id: ALL_MESSAGES_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, "/api/v1/messages");
+    const response = yield call(ApiReq.get, `/api/v1/messages?search=${search}&page=${page}`);
     yield put(stopLoading({ id: ALL_MESSAGES_LOADING_ID }));
 
     yield put(actionType(DISPLAY_ALL_MESSAGES, response.data));
