@@ -5,8 +5,9 @@ import {
   getAllstaffs,
   getAllCategories,
   getOneEvent,
+  updateStreaminKey,
 } from "../../actions";
-import { CREATE_EVENT_LOADING_ID } from "../../constants";
+import { CREATE_EVENT_LOADING_ID,UPDATE_STREAMING_KEY_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
 import EventForm from "../reusableComponents/forms/eventForm";
 
@@ -30,6 +31,9 @@ const EditUserEvent = () => {
 
   const [show, setShow] = useState(false);
   const [Errors, setErros] = useState("");
+  const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(1);
+  const [streamingKey, setStreamingKey] = useState("");
   const [imageResult, setFileResult] = useState("");
   const [videoPath, setVideoPath] = useState("");
   const [videoFile, setVideoFile] = useState("");
@@ -43,6 +47,10 @@ const EditUserEvent = () => {
   const isLoading = useSelector(
     (state) => state?.loader[CREATE_EVENT_LOADING_ID]?.isLoading
   );
+  const isUpdateLoading = useSelector(
+    (state) => state?.loader[UPDATE_STREAMING_KEY_LOADING_ID]?.isLoading
+  );
+
   let history = useNavigate();
 
   const handleInputChange = (e) => {
@@ -143,8 +151,12 @@ const EditUserEvent = () => {
   };
 
   useEffect(() => {
+    dispatch(getAllCategories({ search,page }));
+  }, [dispatch,search,page]);
+
+
+  useEffect(() => {
     dispatch(getAllstaffs());
-    dispatch(getAllCategories());
     dispatch(getOneEvent({ id }));
   }, [dispatch, id]);
 
@@ -167,6 +179,7 @@ const EditUserEvent = () => {
       });
       setFileResult(event?.data?.banner);
       setVideoPath(event?.data?.content);
+      setStreamingKey(`${event?.data?._id}?key=${event?.data?.streamingKey}`)
     }
     if (ErrorMessage && ErrorMessage.length > 0) {
       setErros(ErrorMessage);
@@ -182,12 +195,36 @@ const EditUserEvent = () => {
     }
   }, [ErrorMessage, successMessage, event, history]);
 
+  const copyTextx=()=> {
+   /* Get the text field */
+  var copyText = document.getElementById("streamingKey");
+
+  /* Select the text field */
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+   /* Copy the text inside the text field */
+  navigator.clipboard.writeText(copyText.value);
+  }
+
+  const updateKey= async()=> {
+    /* Get the text field */
+    console.log("=====>")
+     dispatch(updateStreaminKey({ id }))
+    //  if(!!isUpdateLoading){
+    dispatch(getOneEvent({ id }));
+    //  }
+   }
+
   return (
     <>
       <EventForm
         title="Edit Event"
         isOwner={false}
+        streamkey={streamingKey}
         state={eventdata}
+        status={event?.data?.status}
+        updateKey={updateKey}
+        isUpdateLoading={isUpdateLoading}
         videoFile={videoFile}
         imageFile={imageFile}
         imageResult={imageResult}
@@ -195,9 +232,10 @@ const EditUserEvent = () => {
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         show={show}
+        copyTextx={copyTextx}
         setShow={setShow}
         Errors={Errors}
-        categories={categories?.data?.results}
+        categories={categories?.data?.objects}
         staffs={staffs?.data?.objects}
         videoPath={videoPath}
         handleUploadChange={handleUploadChange}

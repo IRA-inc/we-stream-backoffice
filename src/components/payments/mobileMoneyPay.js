@@ -11,6 +11,7 @@ import {
   PAY_WITH_MOMO_LOADING_ID,
 } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
+import moment from "moment"
 // import { getUserId } from "../../../helpers/helperFunction";
 
 const { ErrorResponse, SuccessResponse } = responseComponent;
@@ -40,6 +41,21 @@ const PaywithMomoForm = (props) => {
   useEffect(() => {
     dispatch(myProfileAction());
   }, [dispatch]);
+
+  function diff_minutes(dt2, dt1) 
+ {
+
+  var diff =(dt2 - dt1) / 1000;
+  diff /= 60;
+  return Math.abs(Math.round(diff));
+  
+ }
+
+const dt1 = `${moment(formData?.endDate).format("DD-MM-YYYY")}`+ ' ' +`${moment(formData?.endTime).format("HH:mm")}`;
+const dt2 = `${moment(formData?.startingDate).format("DD-MM-YYYY")}`+ ' ' +`${moment(formData?.startime).format("HH:mm")}`;
+
+console.log(dt1);
+console.log(diff_minutes(dt1, dt2));
 
   useEffect(() => {
     if(userData){
@@ -84,7 +100,7 @@ const PaywithMomoForm = (props) => {
       payWithMomo(paymentData)
     );
   };
-console.log("formData===>",paymentData)
+// console.log("formData===>",paymentData)
   return (
     <>
       <PaymentForm

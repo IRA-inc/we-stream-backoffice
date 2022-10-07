@@ -22,7 +22,11 @@ const AddEvent = () => {
     special:""
   });
 
+  console.log("eventdata==>",eventdata)
+
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(1);
   const [Errors, setErros] = useState("");
   const [imageResult, setFileResult] = useState("");
   const [videoPath, setVideoPath] = useState("");
@@ -115,6 +119,7 @@ const AddEvent = () => {
   };
 
   const changeSpecial = (value) => {
+    console.log("===>",value)
       setEvent({
         ...eventdata,
       special:value,
@@ -141,8 +146,11 @@ const AddEvent = () => {
 
   useEffect(() => {
     dispatch(getAllstaffs());
-    dispatch(getAllCategories());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(getAllCategories({ search,page }));
+  }, [dispatch,search,page]);
 
   useEffect(() => {
     // dispatch(getAllRoles());
@@ -175,7 +183,7 @@ const AddEvent = () => {
         show={show}
         setShow={setShow}
         Errors={Errors}
-        categories={categories?.data?.results}
+        categories={categories?.data?.objects}
         staffs={staffs?.data?.objects}
         videoPath={videoPath}
         handleUploadChange={handleUploadChange}

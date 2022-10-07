@@ -25,7 +25,12 @@ const EventForm = (props) => {
     categories,
     message,
     imageFile,
+    copyTextx,
+    status,
     videoFile,
+    streamkey,
+    updateKey,
+    isUpdateLoading,
     changeSpecial,
     imageResult,
     handleUploadChange,
@@ -135,6 +140,8 @@ const EventForm = (props) => {
                             <option>Choose Type</option>
                             <option value="live">Live</option>
                             <option  value="streaming">Streaming</option>
+                            <option  value="privatestreaming">Private Streaming</option>
+                            <option  value="privateLive">Private Live</option>
                           </select>
                         </Col>
                         <Form.Group className="col-12">
@@ -284,7 +291,7 @@ const EventForm = (props) => {
                     <Col sm="3" className="form-group">
                           <select
                             className="form-control"
-                            id="exampleFormControlSelect2"
+                            // id="exampleFormControlSelect2"
                             name="paymentType"
                             value={state.paymentType}
                             onChange={handleInputChange}
@@ -292,7 +299,7 @@ const EventForm = (props) => {
                           >
                             <option>Choose payment type</option>
                             <option value="free">Free</option>
-                            <option  value="payment">To Pay</option>
+                            <option  value="payment">To Pay</option> 
                           </select>
                         </Col>
                     <Col sm="3" className="col-6 form-group">
@@ -348,6 +355,31 @@ const EventForm = (props) => {
                           </div>
                         </div>
                       </Form.Group>
+                    </Col>:""}
+                    {state.type==="live"&&status==="active"?
+                    <Col sm="6" className="col-12 form-group flex-d">
+                      <label>streaming Key</label>
+                      <Form.Control 
+                      type="text" 
+                      id="streamingKey"
+                      name="streamingKey"
+                      value={streamkey}
+                      placeholder="streaming Key" 
+                      disabled
+                      required
+                      />
+                      <Button type="reset"  onClick={()=>copyTextx()} variant=" btn-success">
+                         copy streaming key
+                        </Button>
+
+                        <Button
+                          type="button"
+                          variant=" btn-primary"
+                          onClick={()=>updateKey()}
+                          disabled={!!isUpdateLoading}
+                        >
+                          {isUpdateLoading ? <ButtonLoader /> : "Update key"}
+                        </Button>{" "}  
                     </Col>:""}
                     <Form.Group className="col-12">
                         {Errors.length > 0 ? (

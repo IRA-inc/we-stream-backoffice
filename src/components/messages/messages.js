@@ -1,24 +1,28 @@
-import React,{ useEffect } from 'react'
+import React,{ useEffect,useState } from 'react'
 import { Link} from 'react-router-dom'
 import {Container,Row,Col,OverlayTrigger,Tooltip} from 'react-bootstrap'
 import Card  from '../Card'
 import { getAllMessage, deleteCategoryAction } from "../../actions";
-import { SEND_MESSAGES_LOADING_ID } from "../../constants";
+import { ALL_MESSAGES_LOADING_ID } from "../../constants";
 import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { TableLoader } from "../reusableComponents";
+import SearchBox from '../reusableComponents/otherComponents/searchBox';
+import Paginations from '../reusableComponents/otherComponents/pagination';
 
 
 const MessagesList = () => { 
     const dispatch = useDispatch();
+    const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(1);
   const messages = useSelector((state) => state.messages.messages);
   const isloading = useSelector(
-    (state) => state?.loader[SEND_MESSAGES_LOADING_ID]?.isLoading
+    (state) => state?.loader[ALL_MESSAGES_LOADING_ID]?.isLoading
   );
 
   useEffect(() => {
-    dispatch(getAllMessage());
-  }, [dispatch]);
+    dispatch(getAllMessage({ search,page }));
+  }, [dispatch,search,page]);
 
   const  deleteCategory = (id) => {
     Swal.fire({
@@ -45,6 +49,15 @@ const MessagesList = () => {
       }
     });
   };
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setSearch(value);
+  };
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
     return (
             <> 
                 <Container fluid>
@@ -55,12 +68,16 @@ const MessagesList = () => {
                                     <Card.Header.Title>
                                         <h4 className="card-title">Messages Lists</h4>
                                     </Card.Header.Title>
+                                    <SearchBox
+                    search={search}
+                    handleInputChange={handleInputChange}
+                  />
                                     {/* <div className="iq-card-header-toolbar d-flex align-items-center">
                                         <Link to="/add-category" className="btn btn-primary"></Link>
                                     </div> */}
                                 </Card.Header>
                                 <Card.Body>
-                                    <div className="table-view">
+                                <div className="table-responsive">
                                         <table className="data-tables table movie_table " style={{width:"100%"}}>
                                             <thead>
                                                 <tr>
@@ -80,9 +97,9 @@ const MessagesList = () => {
                       </tr>
                     ) : (
                       <tbody>
-                        {messages?.data?.results?.map((message, index) => (
+                        {messages?.data?.objects?.map((message, index) => (
                           <tr key={index}>
-                            <td>{index + 1}</td>
+                            <td>{(page - 1) * 10 + index + 1}</td>
                             <td>{message.name}</td>
                             <td>{message.email}</td>
                             <td>{message.PhoneNumber}</td>
@@ -130,6 +147,14 @@ const MessagesList = () => {
                       </tbody>
                     )}
                                         </table>
+                                        
+                   <div className="float-right pb-2">
+                    <Paginations
+                      page={page}
+                      pages={messages?.data?.pages}
+                      onChange={handleChange}
+                    />
+                  </div>
                                     </div>
                                 </Card.Body>
                             </Card>

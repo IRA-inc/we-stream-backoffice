@@ -12,7 +12,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_ONE_CATEGORY,
   EDIT_CATEGORY,
-  DISPLAY_ALL_DATA,
+  DISPLAY_ALL_CATEGORIES,
   DISPLAY_ONE_DATA,
   DELETE_CATEGORY,
   setNotificationMessage,
@@ -49,16 +49,22 @@ export function* createNewCategory(roleInput) {
   }
 }
 
-export function* getCategoriesAction() {
+export function* getCategoriesAction(searchInput) {
+  console.log("====> categry1")
+  const {
+    payload: { search,page },
+  } = searchInput;
   yield put(startLoading({ id: GET_ALL_CATEGORIES_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, "/api/v1/categories");
+    console.log("====> view categry")
+    const response = yield call(ApiReq.get, `/api/v1/categories??search=${search}&page=${page}&limit=${100}`);
     yield put(stopLoading({ id: GET_ALL_CATEGORIES_LOADING_ID }));
 
-    yield put(actionType(DISPLAY_ALL_DATA, response.data));
+    yield put(actionType(DISPLAY_ALL_CATEGORIES, response.data));
 
     yield put(stopLoading({ id: GET_ALL_CATEGORIES_LOADING_ID }));
   } catch (error) {
+    console.log("====> error",error)
     yield put(stopLoading({ id: GET_ALL_CATEGORIES_LOADING_ID }));
     yield put(setErrorNotification(error.response.data.Error));
   }
@@ -104,6 +110,7 @@ export function* EditNewCategory(roleInput) {
     yield put(stopLoading({ id: EDIT_CATEGORY_LOADING_ID }));
     yield put(clearNotificationMessage());
   } catch (error) {
+    console.log(error)
     yield put(stopLoading({ id: EDIT_CATEGORY_LOADING_ID }));
     yield put(setErrorNotification(error.response.data.Error));
     yield put(clearErrorNotification());

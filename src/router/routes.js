@@ -135,6 +135,11 @@ import Layout from '../layouts/layout'
 import BlankLayout from '../layouts/blanklayout';
 import MessagesList from '../components/messages/messages';
 import SendMessage from '../components/messages/respondMessage';
+import AddsList from '../components/Advertersements/advertsList';
+import AddAdvert from '../components/Advertersements/addAddvert';
+import EditAdd from '../components/Advertersements/editAddverts';
+import LoginLanding from '../components/auth/landingPage';
+import MyAccount from '../components/partials/userProfile';
 
 
 
@@ -152,7 +157,9 @@ const Layout1Route = (props) => {
             timeout={300}
             >
                 <Routes history={history}  location={location}>
+                <Route path="/:token" exact element={<LoginLanding />} />
                 <Route element={<Layout />}>
+                    <Route path="/myaccount" exact element={<MyAccount />} />
                     <Route path="/dashboard" exact element={<Dashbord />} />
                     <Route path="/mydashboard" exact element={<EventOwnerDashbord />} />
                     <Route path="/rating" element={<Rating />} />
@@ -200,6 +207,12 @@ const Layout1Route = (props) => {
 
                      {/* App */}
                     <Route path="/send-message/:id" element={<SendMessage />}/>
+
+                   
+                    {/* App */}
+                    <Route path="/addvert-list" element={<AddsList />}/>
+                    <Route path="/add-addvert" element={<AddAdvert />}/>
+                    <Route path="/edit-addvert/:id" element={<EditAdd />}/>
 
                     {/* App */}
                     <Route path="/user-profile"         element={<UserProfile />} />

@@ -22,6 +22,8 @@ const AddMyEvent = () => {
   });
 
   const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(1);
   const [Errors, setErros] = useState("");
   const [ImageResult, setFileResult] = useState("");
   const [videoPath, setVideoPath] = useState("");
@@ -128,8 +130,9 @@ const AddMyEvent = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch]);
+    dispatch(getAllCategories({ search,page }));
+  }, [dispatch,search,page]);
+
 
   useEffect(() => {
     // dispatch(getAllRoles());
@@ -160,7 +163,7 @@ const AddMyEvent = () => {
         show={show}
         setShow={setShow}
         Errors={Errors}
-        categories={categories?.data?.results}
+        categories={categories?.data?.objects}
         videoPath={videoPath}
         handleUploadChange={handleUploadChange}
         changeSpecial={changeSpecial}

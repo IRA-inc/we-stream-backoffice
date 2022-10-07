@@ -23,6 +23,9 @@ const OwnerEditEvent = () => {
   });
   const [show, setShow] = useState(false);
   const [Errors, setErros] = useState("");
+  const [search, setSearch] = useState("");
+  const [page, setPage] = React.useState(1);
+  const [streamingKey, setStreamingKey] = useState("");
   const [imageResult, setFileResult] = useState("");
   const [videoPath, setVideoPath] = useState("");
   const [videoFile, setVideoFile] = useState("");
@@ -139,9 +142,14 @@ const OwnerEditEvent = () => {
   };
 
   useEffect(() => {
-    dispatch(getAllCategories());
+    dispatch(getAllCategories({ search,page }));
+  }, [dispatch,search,page]);
+
+
+  useEffect(() => {
     dispatch(getOneEvent({ id }));
   }, [dispatch, id]);
+  
 
   useEffect(() => {
     if (event) {
@@ -160,6 +168,7 @@ const OwnerEditEvent = () => {
         special:event?.data?.special,
       });
       setVideoPath(event?.data?.content)
+      setStreamingKey(event?.data?.streamingKey)
     }
     if (ErrorMessage && ErrorMessage.length > 0) {
       setErros(ErrorMessage);
@@ -175,12 +184,26 @@ const OwnerEditEvent = () => {
     }
   }, [ErrorMessage, successMessage, event, history]);
 
+  const copyTextx=()=> {
+    /* Get the text field */
+   var copyText = document.getElementById("streamingKey");
+ 
+   /* Select the text field */
+   copyText.select();
+   copyText.setSelectionRange(0, 99999); /* For mobile devices */
+    /* Copy the text inside the text field */
+   navigator.clipboard.writeText(copyText.value);
+   }
+  
   return (
+    
     <>
       <EventForm
         title="Edit Event"
         isOwner={true}
         state={eventdata}
+        streamkey={streamingKey}
+        status={event?.data?.status}
         videoFile={videoFile}
         imageResult={imageResult}
         imageFile={imageFile}
@@ -188,9 +211,10 @@ const OwnerEditEvent = () => {
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
         show={show}
+        copyTextx={copyTextx}
         setShow={setShow}
         Errors={Errors}
-        categories={categories?.data?.results}
+        categories={categories?.data?.objects}
         videoPath={videoPath}
         handleUploadChange={handleUploadChange}
         changeSpecial={changeSpecial}

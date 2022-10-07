@@ -57,7 +57,7 @@ const handleChange = (event,value) => {
     return (
             <> 
                <PaymentDetailsTable
-               title="My Event Payments Lists"
+               title="My Earnings payout Details"
                payments={payments}
                isloading={isloading}
                search={search}
