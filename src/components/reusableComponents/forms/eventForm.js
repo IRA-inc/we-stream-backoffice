@@ -140,7 +140,7 @@ const EventForm = (props) => {
                             <option>Choose Type</option>
                             <option value="live">Live</option>
                             <option  value="streaming">Streaming</option>
-                            <option  value="privatestreaming">Private Streaming</option>
+                            <option  value="privateStreaming">Private Streaming</option>
                             <option  value="privateLive">Private Live</option>
                           </select>
                         </Col>
@@ -172,7 +172,6 @@ const EventForm = (props) => {
                         <div className="embed-responsive embed-responsive-4by3">
                         {/* <iframe className="embed-responsive-item" style={{height:"80%"}} title="iframe2" src={videoPath} allowFullScreen></iframe> */}
                         <video  className="video d-block"  style={{height:"80%"}} controls loop>
-                          {console.log("videoPath====>",videoPath)}
               <source src={videoPath} type="video/mp4"/>
             </video>
                         <div className="d-flex">
@@ -199,7 +198,7 @@ const EventForm = (props) => {
                           <Form.Control type="date" 
                            name="startingDate"
                            value={state.startingDate}
-                           min={moment().format("YYYY-MM-DD")}
+                           min={title==="Add Event"?moment().format("YYYY-MM-DD"):""}
                            max={state.endDate!==""?state.endDate:""}
                            onChange={handleInputChange}
                           placeholder="Start Date" />
@@ -224,8 +223,8 @@ const EventForm = (props) => {
                           <Form.Control type="time" 
                            name="startTime"
                            value={state.startTime}
-                           min={moment().format("HH:mm")}
-                           max={state.endTime!==""?state.endTime:""}
+                          //  min={moment().format("HH:mm")}
+                          //  max={state.endTime!==""?state.endTime:""}
                            onChange={handleInputChange}
                            placeholder="Start Time"
                            required
@@ -239,7 +238,7 @@ const EventForm = (props) => {
                           type="time" 
                           name="endTime"
                           value={state.endTime}
-                          min={state.startTime!==""?state.startTime:""}
+                          // min={state.startTime!==""?state.startTime:""}
                           onChange={handleInputChange}
                           placeholder="End time"
                           required
@@ -324,9 +323,9 @@ const EventForm = (props) => {
                               type="radio"
                               id="customRadio6"
                               name="customRadio-1"
-                              checked={state?.special}
-                              value={state?.special}
-                              onChange={() => changeSpecial(true)}
+                              checked={state?.special==="true"?true:false}
+                              // value={state?.special}
+                              onChange={() => changeSpecial("true")}
                               className="custom-control-input"
                             />
                             <label
@@ -341,9 +340,9 @@ const EventForm = (props) => {
                               type="radio"
                               id="customRadio7"
                               name="customRadio-1"
-                              checked={state?.special}
-                              value={state?.special}
-                              onChange={() => changeSpecial(false)}
+                              checked={state?.special==="false"?true:false}
+                              // value={state?.special}
+                              onChange={() => changeSpecial("false")}
                               className="custom-control-input"
                             />
                             <label
@@ -355,6 +354,19 @@ const EventForm = (props) => {
                           </div>
                         </div>
                       </Form.Group>
+                    </Col>:""}
+                    {state.type==="privateStreaming" || state.type==="privateLive"?
+                    <Col sm="6" className="col-12 form-group flex-d">
+                      <label>Private Link</label>
+                      <Form.Control 
+                      type="text" 
+                      id="privateLink"
+                      name="privateLink"
+                      value={state.privateLink}
+                      placeholder="Private Link" 
+                      onChange={handleInputChange}
+                      required
+                      />  
                     </Col>:""}
                     {state.type==="live"&&status==="active"?
                     <Col sm="6" className="col-12 form-group flex-d">

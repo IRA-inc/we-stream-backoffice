@@ -20,6 +20,7 @@ const OwnerEditEvent = () => {
     paymentType: "",
     description: "",
     special:false,
+    privateLink:""
   });
   const [show, setShow] = useState(false);
   const [Errors, setErros] = useState("");
@@ -49,6 +50,21 @@ const OwnerEditEvent = () => {
         price: 0,
       });
       return;
+    }
+    if (name === "type" && value === "live") {
+      setEvent({
+        ...eventdata,
+        [name]: value,
+        privateLink: "",
+      });
+      return;
+    }
+    if (name === "type" && value === "streaming") {
+      setEvent({
+        ...eventdata,
+        [name]: value,
+        privateLink: "",
+      });
     }
     setEvent({
       ...eventdata,
@@ -166,6 +182,7 @@ const OwnerEditEvent = () => {
         paymentType: event?.data?.paymentType,
         description: event?.data?.description,
         special:event?.data?.special,
+        privateLink:event?.data?.privateLink,
       });
       setVideoPath(event?.data?.content)
       setStreamingKey(event?.data?.streamingKey)

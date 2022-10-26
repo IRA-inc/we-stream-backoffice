@@ -19,6 +19,7 @@ const AddMyEvent = () => {
     paymentType: "",
     description: "",
     special:false,
+    privateLink:""
   });
 
   const [show, setShow] = useState(false);
@@ -47,6 +48,21 @@ const AddMyEvent = () => {
         price: 0,
       });
       return;
+    }
+    if (name === "type" && value === "live") {
+      setEvent({
+        ...eventdata,
+        [name]: value,
+        privateLink: "",
+      });
+      return;
+    }
+    if (name === "type" && value === "streaming") {
+      setEvent({
+        ...eventdata,
+        [name]: value,
+        privateLink: "",
+      });
     }
     setEvent({
       ...eventdata,

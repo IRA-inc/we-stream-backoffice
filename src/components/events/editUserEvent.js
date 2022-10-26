@@ -27,6 +27,7 @@ const EditUserEvent = () => {
     paymentType: "",
     description: "",
     special:"",
+    privateLink: "",
   });
 
   const [show, setShow] = useState(false);
@@ -62,6 +63,21 @@ const EditUserEvent = () => {
         price: 0,
       });
       return;
+    }
+    if (name === "type" && value === "live") {
+      setEvent({
+        ...eventdata,
+        [name]: value,
+        privateLink: "",
+      });
+      return;
+    }
+    if (name === "type" && value === "streaming") {
+      setEvent({
+        ...eventdata,
+        [name]: value,
+        privateLink: "",
+      });
     }
     setEvent({
       ...eventdata,
@@ -176,6 +192,7 @@ const EditUserEvent = () => {
         paymentType: event?.data?.paymentType,
         description: event?.data?.description,
         special:event?.data?.special,
+        privateLink: event?.data?.privateLink,
       });
       setFileResult(event?.data?.banner);
       setVideoPath(event?.data?.content);

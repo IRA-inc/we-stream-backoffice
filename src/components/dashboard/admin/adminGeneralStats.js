@@ -34,7 +34,7 @@ const GeneralStats=()=>{
                    </div>
                    <div className="d-flex align-items-center justify-content-between mt-3">
                       <h4 className=" mb-0">{appStats?.data?.views}</h4>
-                      <p className="mb-0 text-primary"><span><i className="fa fa-caret-down mr-2"></i></span>35%</p>
+                      {/* <p className="mb-0 text-primary"><span><i className="fa fa-caret-down mr-2"></i></span>35%</p> */}
                    </div>
                 </Card.Body>
              </Card>
@@ -54,7 +54,7 @@ const GeneralStats=()=>{
                    </div>
                    <div className="d-flex align-items-center justify-content-between mt-3">
                       <h4 className="mb-0">{appStats?.data?.events}</h4>
-                      <p className="mb-0 text-warning"><span><i className="fa fa-caret-up mr-2"></i></span>50%</p>
+                      {/* <p className="mb-0 text-warning"><span><i className="fa fa-caret-up mr-2"></i></span>50%</p> */}
                    </div>
                 </Card.Body>
              </Card>
@@ -74,7 +74,7 @@ const GeneralStats=()=>{
                    </div>
                    <div className="d-flex align-items-center justify-content-between mt-3">
                       <h4 className="mb-0">{appStats?.data?.eventOrganizers}</h4>
-                      <p className="mb-0 text-info"><span><i className="fa fa-caret-up mr-2"></i></span>80%</p>
+                      {/* <p className="mb-0 text-info"><span><i className="fa fa-caret-up mr-2"></i></span>80%</p> */}
                    </div>
                 </Card.Body>
              </Card>
@@ -94,7 +94,7 @@ const GeneralStats=()=>{
                    </div>
                    <div className="d-flex align-items-center justify-content-between mt-3">
                       <h4 className="mb-0">{appStats?.data?.viewers}</h4>
-                      <p className="mb-0 text-success"><span><i className="fa fa-caret-up mr-2"></i></span>80%</p>
+                      {/* <p className="mb-0 text-success"><span><i className="fa fa-caret-up mr-2"></i></span>80%</p> */}
                    </div>
                 </Card.Body>
              </Card>
