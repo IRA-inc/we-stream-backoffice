@@ -4,6 +4,8 @@ import Card from "../../../components/Card";
 import ButtonLoader from "../../reusableComponents/Loaders/buttonLoader";
 import responseComponent from "../../../helpers/responseComponent";
 import Select from "react-select";
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const { ErrorResponse, SuccessResponse } = responseComponent;
 
@@ -12,6 +14,7 @@ const UserForm = (props) => {
     userProfile,
     state,
     handleInputChange,
+    handlephoneNumberChange,
     handleSubmit,
     isLoading,
     show,
@@ -122,14 +125,34 @@ const UserForm = (props) => {
                       </Form.Group>
 }
                       <Form.Group className="form-group">
-                        <Form.Control
-                          type="tel"
-                          id="exampleInputphone"
-                          name="phoneNumber"
-                          value={state?.phoneNumber}
-                          onChange={handleInputChange}
-                          placeholder="phone number"
-                        />
+                      <PhoneInput
+										country={'rw'}
+										onlyCountries={['rw']}
+										value={state.phoneNumber}
+										onChange={(phoneNumber) => handlephoneNumberChange(phoneNumber)}
+										containerClass="col-lg-12 w-100 pl-0 pr-0"
+                    inputClass="col-lg-12 w-100 h-82"
+                    inputStyle={{height:"48px",backgroundColor:"#141414",border: "1px solid #404043"}}
+										inputProps={{
+											name: 'phoneNumber',
+											required: true,
+											autoFocus: true,
+											
+										}}
+										isValid={(value) => {
+											if (value.match(/12345/)) {
+											  return 'Invalid phone number'
+											} else if (value.match(/1234/)) {
+											  return false;
+											}
+											 else if (state?.phoneNumber?.length <12||state?.phoneNumber?.length>12) {
+											  return false; 
+											} 
+											else {
+											  return true;
+											}
+										  }}
+									/>
                       </Form.Group>
                       {userProfile ===true?"":   
                       <>         
