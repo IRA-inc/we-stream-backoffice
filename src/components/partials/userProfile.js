@@ -52,6 +52,13 @@ const MyAccount = () => {
           gender: gender,
         });
       };
+
+      const handlephoneNumberChange = (phoneNumber) => {
+        setUser({
+          ...user,
+          phoneNumber: phoneNumber,
+        });
+      };
       
   useEffect(() => {
     dispatch(myProfileAction());
@@ -94,7 +101,6 @@ const MyAccount = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitting=====>")
     await dispatch(editProfileAction({user}));
     await dispatch(myProfileAction());
   };
@@ -136,6 +142,7 @@ const MyAccount = () => {
                                     state={user}
                                     isLoading={isLoading}
                                     handleInputChange={handleInputChange}
+                                    handlephoneNumberChange={handlephoneNumberChange}
                                     handleSubmit={handleSubmit}
                                     show={show}
                                     setShow={setShow}
