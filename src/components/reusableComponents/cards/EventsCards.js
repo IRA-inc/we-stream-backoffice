@@ -47,7 +47,7 @@ const EventsCard =(props)=>{
                                       <h6 className="font-weight-600 mb-0">{stats?.event[0]?.name}</h6>
                                       {/* <p className="mb-0 mt-2">T.v show</p> */}
                                       <div className="d-flex align-items-center my-2 iq-ltr-direction">
-                                         <p className="mb-0 mr-2"><i className="lar la-eye mr-1"></i>{stats.views}</p>
+                                         <p className="mb-0 mr-2"><i className="lar la-eye mr-1"></i>{stats?.views}</p>
                                          <p className="mb-0 "><i className="las la-download ml-2"></i> {stats?.maxTotalAmount} frw</p>
                                       </div>
                                    </div>
