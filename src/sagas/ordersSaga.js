@@ -25,7 +25,7 @@ export function* getOwnerOdersAction(searchInput) {
   } = searchInput;
   yield put(startLoading({ id: OWNER_ORDERS_LOADING_ID }));
   try {
-    const response = yield call(ApiReq.get, `/api/v1/orders/viewers/orders?search=${search}&page=${page}`);
+    const response = yield call(ApiReq.get, `/api/v1/orders/viewers/orders?search=${search}&page=${page}&limit=${10}`);
     yield put(stopLoading({ id: OWNER_ORDERS_LOADING_ID }));
 
     yield put(actionType(DISPLAY_ALL_ORDERS, response.data));
