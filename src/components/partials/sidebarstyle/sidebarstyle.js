@@ -17,6 +17,8 @@ const minisidbar =() =>{
     document.body.classList.toggle('sidebar-main')
 }
 
+const {REACT_APP_HOME_URL} = process.env;
+
 
 const SidebarStyle = (props) => {
     
@@ -77,7 +79,7 @@ const SidebarStyle = (props) => {
                 <div className="data-scrollbar" data-scroll="1" id="sidebar-scrollbar">
                     <nav className="iq-sidebar-menu">
                     <Accordion as="ul" id="iq-sidebar-toggle" className="iq-menu" onSelect={(e) => setActiveMenu(e)}>
-                        <li className={`${location.pathname === '/' ? 'active' : ''} `}>
+                        <li className={`${location.pathname === `/${REACT_APP_HOME_URL}` ? 'active' : ''} `}>
                             <Link to="/" className="text-primary">
                                 <i className="ri-arrow-right-line"></i>
                                 <span>Visit site</span>
