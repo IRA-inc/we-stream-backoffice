@@ -6,13 +6,7 @@ import CustomToggle from "../../dropdowns";
 
 //img
 
-import user1 from "../../../assets/images/user/2.jpg";
-import user01 from "../../../assets/images/user/2.jpg";
-import user02 from "../../../assets/images/user/2.jpg";
-import user03 from "../../../assets/images/user/3.jpg";
-import user04 from "../../../assets/images/user/4.jpg";
-import user05 from "../../../assets/images/user/5.jpg";
-
+import user1 from "../../../assets/images/user/Profile-user.png";
 //img
 import logo from "../../../../src/assets/images/VOSPLAY icon.png";
 import { myProfileAction, signOut } from "../../../actions";

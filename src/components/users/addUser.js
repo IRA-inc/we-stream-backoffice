@@ -71,6 +71,13 @@ const AddUser = () => {
     });
   }
 
+  const handlephoneNumberChange = (phoneNumber) => {
+    setUser({
+      ...user,
+      phoneNumber: phoneNumber,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await dispatch(createUser(user));
@@ -110,6 +117,7 @@ const AddUser = () => {
           Errors={Errors}
           roles={roles?.data?.objects}
           changeGender={changeGender}
+          handlephoneNumberChange={handlephoneNumberChange}
           handleselectedApprovalLevel={handleselectedApprovalLevel}
           handleselectedUserRoles={handleselectedUserRoles}
           message="User created successfuly"

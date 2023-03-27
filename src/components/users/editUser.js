@@ -44,9 +44,6 @@ const EditUser = () => {
     });
   };
 
-  console.log('user',user?.password)
-  console.log("selectedapprovalLevel===>",userData?.data)
-
   const handleselectedUserRoles = (selected) => {
     const selectedRoles = selected || [];
     const selectedUserRoles = selectedRoles.map(
@@ -69,6 +66,13 @@ const EditUser = () => {
       approvalLevel: selectedUserLevel,
     });
   }
+
+  const handlephoneNumberChange = (phoneNumber) => {
+    setUser({
+      ...user,
+      phoneNumber: phoneNumber,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -120,6 +124,7 @@ const EditUser = () => {
           Errors={Errors}
           roles={roles?.data?.objects}
           changeGender={changeGender}
+          handlephoneNumberChange={handlephoneNumberChange}
           handleselectedApprovalLevel={handleselectedApprovalLevel}
           handleselectedUserRoles={handleselectedUserRoles}
           message="Changes saved successfuly"
