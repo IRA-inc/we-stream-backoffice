@@ -161,7 +161,6 @@ export function* EditNewUser(userInput) {
     yield put(stopLoading({ id: EDIT_USER_LOADING_ID }));
     yield put(clearNotificationMessage());
   } catch (error) {
-    console.log("response====>",error);
     yield put(stopLoading({ id: EDIT_USER_LOADING_ID }));
     yield put(setErrorNotification(error.response.data.Error));
     yield put(clearErrorNotification());
@@ -169,7 +168,6 @@ export function* EditNewUser(userInput) {
 }
 
 export function* EditProfile(userInput) {
-  console.log("sagaaction=====>")
   const {
     payload:{
       user:{
@@ -199,7 +197,6 @@ export function* EditProfile(userInput) {
     yield put(stopLoading({ id: EDIT_PROFILE_LOADING_ID }));
     yield put(clearNotificationMessage());
   } catch (error) {
-    console.log("response====>",error);
     yield put(stopLoading({ id: EDIT_PROFILE_LOADING_ID }));
     yield put(setErrorNotification(error.response.data.Error));
     yield put(clearErrorNotification());
@@ -239,7 +236,6 @@ export function* activateUser(roleInput) {
 }
 
 export function* getMyProfileAction() {
- 
   yield put(startLoading({ id: MY_PROFILE_LOADING_ID }));
   try {
     const response = yield call(ApiReq.get, `/api/v1/users/myprofile`);

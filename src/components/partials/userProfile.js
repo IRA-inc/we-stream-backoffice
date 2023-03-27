@@ -6,7 +6,7 @@ import { Col, Row, Container, Form } from 'react-bootstrap'
 // Datepicker
 // import DatePicker from "react-datepicker";
 // import "react-datepicker/dist/react-datepicker.css";
-import userImage from '../../assets/images/user/2.jpg'
+import userImage from '../../assets/images/user/Profile-user.png'
 import UserForm from '../reusableComponents/forms/userForm';
 // import PaywithMomoForm from "../payments/mobileSubscription";
 // import PaywithCardForm from "../payments/subcription";
