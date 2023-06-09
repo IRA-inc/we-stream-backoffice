@@ -5,6 +5,7 @@ import { TableLoader } from "../../reusableComponents";
 import moment from 'moment'
 import Paginations from '../otherComponents/pagination';
 import SearchBox from '../otherComponents/searchBox';
+import { checkEventOwnerRole } from '../../../helpers/checkRoleHelper';
 
 const EventTableOwner=(props)=>{
 
@@ -28,7 +29,7 @@ const { deleteEvent,isloading,events,title,search,handleInputChange,page,pages,o
                         {/* <div className="iq-custom-select d-inline-block sea-epi s-margin mx-2">
                           <Select options={options2} />
                           </div> */}
-                                    <Link to="/add-event" className="btn btn-primary">Add event</Link>
+                                    <Link to={checkEventOwnerRole()?"/add-new-event":"/add-new-event"} className="btn btn-primary">Add event</Link>
                                 </div>
                     </Card.Header>
                     <Card.Body>
