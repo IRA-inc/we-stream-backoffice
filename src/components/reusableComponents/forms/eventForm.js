@@ -298,7 +298,8 @@ const EventForm = (props) => {
                           >
                             <option>Choose payment type</option>
                             <option value="free">Free</option>
-                            <option  value="payment">To Pay</option> 
+                            <option  value="payment">To Pay</option>
+                            <option  value="subscription">Subscription</option> 
                           </select>
                         </Col>
                     <Col sm="3" className="col-6 form-group">

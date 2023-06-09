@@ -6,6 +6,7 @@ import moment from 'moment'
 import Select from 'react-select'
 import SearchBox from '../otherComponents/searchBox';
 import Paginations from '../otherComponents/pagination';
+import { checkEventOwnerRole } from '../../../helpers/checkRoleHelper';
 
 const EventTable=(props)=>{
 
@@ -32,7 +33,7 @@ const options2 = [
                         <div className="iq-custom-select d-inline-block sea-epi s-margin mx-2">
                           <Select options={options2} />
                           </div>
-                                    <Link to="/add-event" className="btn btn-primary">Add event</Link>
+                                    <Link to={checkEventOwnerRole()?"/add-new-event":"/add-event"} className="btn btn-primary">Add event</Link>
                                 </div>
                     </Card.Header>
                     <Card.Body>

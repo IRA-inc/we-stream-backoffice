@@ -28,7 +28,7 @@ const { isloading,orders,title,search,handleInputChange,page,pages,onChange }=pr
                         {/* <div className="iq-custom-select d-inline-block sea-epi s-margin mx-2">
                           <Select options={options2} />
                           </div> */}
-                                    <Link to="/add-event" className="btn btn-primary">Add event</Link>
+                                    <Link to="/add-new-event" className="btn btn-primary">Add event</Link>
                                 </div>
                     </Card.Header>
                     <Card.Body>
